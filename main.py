@@ -1,4 +1,105 @@
-import sklearn
+from sklearn import svm
+from sklearn import preprocessing
+from sklearn import linear_model
+from sklearn.metrics import confusion_matrix
+import numpy as np
+
+
+def team_converter(s):
+    if s == "BourgeB":
+        return (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1)
+    if s == "Strasburgo":
+        return (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0)
+    if s == "Gazelec":
+        return (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0)
+    if s == "Brest":
+        return (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0)
+    if s == "Nimes":
+        return (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0)
+    if s == "Laval":
+        return (0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0)
+    if s == "Niort":
+        return (0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0)
+    if s == "Lens":
+        return (0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0)
+    if s == "Orleans":
+        return (0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0)
+    if s == "Havre":
+        return (0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0)
+    if s == "Tours":
+        return (0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)
+    if s == "Ajaccio":
+        return (0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0)
+    if s == "Troyes":
+        return (0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0)
+    if s == "Sochaux":
+        return (0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0)
+    if s == "Valenciennes":
+        return (0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+    if s == "Clermont":
+        return (0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+    if s == "RedStar":
+        return (0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+    if s == "Auxerre":
+        return (0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+    if s == "Amiens":
+        return (0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+    if s == "Reims":
+        return (1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+
+# def team_converter(s):
+#     if s == "BourgeB":
+#         return (0)
+#     if s == "Strasburgo":
+#         return (1)
+#     if s == "Gazelec":
+#         return (2)
+#     if s == "Brest":
+#         return (3)
+#     if s == "Nimes":
+#         return (4)
+#     if s == "Laval":
+#         return (5)
+#     if s == "Niort":
+#         return (6)
+#     if s == "Lens":
+#         return (7)
+#     if s == "Orleans":
+#         return (8)
+#     if s == "Havre":
+#         return (9)
+#     if s == "Tours":
+#         return (10)
+#     if s == "Ajaccio":
+#         return (11)
+#     if s == "Troyes":
+#         return (12)
+#     if s == "Sochaux":
+#         return (13)
+#     if s == "Valenciennes":
+#         return (14)
+#     if s == "Clermont":
+#         return (15)
+#     if s == "RedStar":
+#         return (16)
+#     if s == "Auxerre":
+#         return (17)
+#     if s == "Amiens":
+#         return (18)
+#     if s == "Reims":
+#         return (19)
+
+def convert_dict_to_list(dic):
+    x = []
+    y = []
+    for key in dic:
+        x.append(team_converter(key[0]) + team_converter(key[1]))
+        if dic[key] == 0:
+            y.append(0)
+        else:
+            y.append(1)
+
+    return x, y
 
 resultsday1 = {("BourgeB", "Strasburgo"): 0, ("Gazelec","Brest"): 0, ("Nimes","Laval"): 0, ("Niort","Lens"): 0, ("Orleans","Havre"): 2,
            ("Tours","Ajaccio"): 0, ("Troyes","Sochaux"): 2, ("Valenciennes","Clermont"): 1, ("RedStar","Auxerre"): 0, ("Amiens","Reims"): 0}
@@ -14,7 +115,31 @@ resultsday9 = {("Auxerre","Havre"): 2, ("BourgeB","Laval"): 0, ("Clermont","Stra
                ("Orleans", "Amiens"): 2, ("RedStar","Niort"): 2, ("Troyes","Tours"): 1, ("Sochaux","Ajaccio"): 1,
                ("Valenciennes","Lens"): 2, ("Brest","Reims"): 1}
 
-#X = [[0, 0], [1, 1]]
-#y = [0, 1]
-#clf = svm.SVC()
-#clf.fit(X,y)
+new_dict = {}
+new_dict = resultsday1.copy()
+new_dict.update(resultsday7)
+new_dict.update(resultsday9)
+
+
+
+X , y = convert_dict_to_list(new_dict)
+#clf = linear_model.LinearRegression()
+clf = svm.SVC(kernel='linear', degree=3, probability=True, C=1)
+
+X1, y1 = convert_dict_to_list(resultsday8)
+print X
+print y
+print X1
+
+clf.fit(X,y)
+print y1
+print clf.predict(X1)
+print clf.predict_proba(X1)
+print clf.score(X1, y1)
+
+cm = confusion_matrix(y1, clf.predict(X1))
+
+tp = float(cm[0][0])/np.sum(cm[0])
+tn = float(cm[1][1])/np.sum(cm[1])
+print tp
+print tn

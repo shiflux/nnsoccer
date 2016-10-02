@@ -93,8 +93,8 @@ def convert_dict_to_list(dic):
     x = []
     y = []
     for key in dic:
-        print key[0]
-        print key[1]
+        #print key[0]
+        #print key[1]
         x.append(team_converter(key[0]) + team_converter(key[1]))
         if dic[key] == 0:
             y.append(0)
@@ -110,7 +110,7 @@ resultsday2 = {("Ajaccio","Troyes"): 1, ("Auxerre","Gazelec"): 2, ("Brest","Orle
                ("Laval","Niort"): 0, ("Havre","Nimes"): 1, ("Lens","Tours"): 0, ("Reims","BourgeB"): 1,
                ("Sochaux","Valenciennes"): 0, ("Strasburgo","Amiens"): 1}
 
-resultsday3 = {("Amiens","Niort"): 1, ("BourgeBresse","Auxerre"): 2, ("Clermont","Sochaux"): 2, ("Gazelec","Havre"): 0,
+resultsday3 = {("Amiens","Niort"): 1, ("BourgeB","Auxerre"): 2, ("Clermont","Sochaux"): 2, ("Gazelec","Havre"): 0,
                ("Orleans","Ajaccio"): 1, ("RedStar","Brest"): 2, ("Tours","Strasburgo"): 2, ("Troyes","Laval"): 1,
                ("Valenciennes","Reims"): 0, ("Nimes","Lens"): 2}
 

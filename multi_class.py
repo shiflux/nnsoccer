@@ -114,7 +114,7 @@ def fit_dict(dict_list_v, v):
             new_dict.update(d)
 
     X , y = convert_dict_to_list(new_dict)
-    clf = svm. SVC(kernel='linear', C=3, decision_function_shape='ovo')
+    clf = svm. SVC(kernel='linear', C=1.5)
 
     X1, y1 = convert_dict_to_list(dict_list[v])
 
@@ -129,8 +129,7 @@ def fit_dict(dict_list_v, v):
     tn = float(cm[1][1])/np.sum(cm[1])
     #print (tp)
     #print (tn)
-    print (float(cm[0][0])/len(np.where(clf.predict(X1)==0)[0]))
-    return float(cm[0][0])/len(np.where(clf.predict(X1)==0)[0])
+    return clf.score(X1, y1)
 
 
 

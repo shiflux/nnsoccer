@@ -171,6 +171,10 @@ resultsday9 = {("Auxerre","Havre"): 2, ("BourgeB","Laval"): 0, ("Clermont","Stra
                ("Orleans", "Amiens"): 2, ("RedStar","Niort"): 2, ("Troyes","Tours"): 1, ("Sochaux","Ajaccio"): 1,
                ("Valenciennes","Lens"): 2, ("Brest","Reims"): 1}
 
+resultsday10 = {("Ajaccio","Brest"): 0, ("Amiens","Troyes"): 2, ("Laval","Clermont"): 0, ("Lens","RedStar"): 1,
+               ("Nimes","BourgeB"): 0, ("Niort","Orleans"): 1, ("Reims","Auxerre"): 1, ("Tours","Gazelec"): 2,
+               ("Strasburgo","Valenciennes"): 2, ("Havre","Sochaux"): 1}
+
 # new_dict = {}
 # new_dict = resultsday1.copy()
 # new_dict.update(resultsday2)
@@ -190,6 +194,7 @@ dict_list.append(resultsday6)
 dict_list.append(resultsday7)
 dict_list.append(resultsday8)
 dict_list.append(resultsday9)
+dict_list.append(resultsday10)
 
 results = []
 for x in range(9):
@@ -197,3 +202,5 @@ for x in range(9):
 
 print results
 print np.mean(results)
+
+fit_dict(dict_list,9)

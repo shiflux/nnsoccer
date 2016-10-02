@@ -117,7 +117,7 @@ def fit_dict(dict_list_v, v):
             new_dict.update(d)
 
     X , y = convert_dict_to_list(new_dict)
-    clf = svm.SVC(kernel='linear', C=100)
+    clf = svm.SVC(kernel='linear', C=3)
 
     X1, y1 = convert_dict_to_list(dict_list[v])
 
@@ -173,7 +173,7 @@ resultsday9 = {("Auxerre","Havre"): 2, ("BourgeB","Laval"): 0, ("Clermont","Stra
 
 resultsday10 = {("Ajaccio","Brest"): 0, ("Amiens","Troyes"): 2, ("Laval","Clermont"): 0, ("Lens","RedStar"): 1,
                ("Nimes","BourgeB"): 0, ("Niort","Orleans"): 1, ("Reims","Auxerre"): 1, ("Tours","Gazelec"): 2,
-               ("Strasburgo","Valenciennes"): 2, ("Havre","Sochaux"): 1}
+               ("Strasburgo","Valenciennes"): 2, ("Havre","Sochaux"): 0}
 
 # new_dict = {}
 # new_dict = resultsday1.copy()
@@ -197,10 +197,11 @@ dict_list.append(resultsday9)
 dict_list.append(resultsday10)
 
 results = []
-for x in range(9):
+for x in range(10):
     results.append(fit_dict(dict_list,x))
 
 print results
 print np.mean(results)
 
+print dict_list[9]
 fit_dict(dict_list,9)

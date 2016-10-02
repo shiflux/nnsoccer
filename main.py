@@ -93,6 +93,8 @@ def convert_dict_to_list(dic):
     x = []
     y = []
     for key in dic:
+        print key[0]
+        print key[1]
         x.append(team_converter(key[0]) + team_converter(key[1]))
         if dic[key] == 0:
             y.append(0)

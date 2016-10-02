@@ -98,7 +98,7 @@ def convert_dict_to_list(dic):
         #print key[0]
         #print key[1]
         x.append(team_converter(key[0]) + team_converter(key[1]))
-        y = dic[key]
+        y.append(dic[key])
 
     return x, y
 

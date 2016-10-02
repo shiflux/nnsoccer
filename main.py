@@ -131,9 +131,10 @@ def fit_dict(dict_list_v, v):
 
     tp = float(cm[0][0])/np.sum(cm[0])
     tn = float(cm[1][1])/np.sum(cm[1])
-    print (tp)
-    print (tn)
+    #print (tp)
+    #print (tn)
     print (float(cm[0][0])/len(np.where(clf.predict(X1)==0)[0]))
+    return float(cm[0][0])/len(np.where(clf.predict(X1)==0)[0])
 
 
 
@@ -191,4 +192,8 @@ dict_list.append(resultsday7)
 dict_list.append(resultsday8)
 dict_list.append(resultsday9)
 
-fit_dict(dict_list,8)
+results = []
+for x in range(9):
+    results.append(fit_dict(dict_list,x))
+
+print results

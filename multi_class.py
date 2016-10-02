@@ -114,7 +114,7 @@ def fit_dict(dict_list_v, v):
             new_dict.update(d)
 
     X , y = convert_dict_to_list(new_dict)
-    clf = svm.SVC(kernel='linear', C=3)
+    clf = svm.LinearSVC(C=3)
 
     X1, y1 = convert_dict_to_list(dict_list[v])
 

@@ -89,6 +89,8 @@ def team_converter(s):
 #     if s == "Reims":
 #         return (19)
 
+
+
 def convert_dict_to_list(dic):
     x = []
     y = []
@@ -102,6 +104,38 @@ def convert_dict_to_list(dic):
             y.append(1)
 
     return x, y
+
+def fit_dict(dict_list_v, v):
+    new_dict_list = dict_list_v[:v] + dict_list_v[v+1:]
+    new_dict = {}
+    flag = True
+    for d in new_dict_list:
+        if flag:
+            new_dict = d.copy()
+            flag = False
+        else:
+            new_dict.update(d)
+
+    X , y = convert_dict_to_list(new_dict)
+    clf = svm.SVC(kernel='linear', probability=True, C=1)
+
+    X1, y1 = convert_dict_to_list(dict_list[v])
+
+    clf.fit(X,y)
+    print (y1)
+    print (clf.predict(X1))
+    print (clf.predict_proba(X1))
+    print (clf.score(X1, y1))
+
+    cm = confusion_matrix(y1, clf.predict(X1))
+
+    tp = float(cm[0][0])/np.sum(cm[0])
+    tn = float(cm[1][1])/np.sum(cm[1])
+    print (tp)
+    print (tn)
+    print (float(cm[0][0])/len(np.where(clf.predict(X1)==0)[0]))
+
+
 
 resultsday1 = {("BourgeB", "Strasburgo"): 0, ("Gazelec","Brest"): 0, ("Nimes","Laval"): 0, ("Niort","Lens"): 0, ("Orleans","Havre"): 2,
            ("Tours","Ajaccio"): 0, ("Troyes","Sochaux"): 2, ("Valenciennes","Clermont"): 1, ("RedStar","Auxerre"): 0, ("Amiens","Reims"): 0}
@@ -137,34 +171,24 @@ resultsday9 = {("Auxerre","Havre"): 2, ("BourgeB","Laval"): 0, ("Clermont","Stra
                ("Orleans", "Amiens"): 2, ("RedStar","Niort"): 2, ("Troyes","Tours"): 1, ("Sochaux","Ajaccio"): 1,
                ("Valenciennes","Lens"): 2, ("Brest","Reims"): 1}
 
-new_dict = {}
-new_dict = resultsday1.copy()
-new_dict.update(resultsday2)
-new_dict.update(resultsday3)
-new_dict.update(resultsday4)
-new_dict.update(resultsday5)
-new_dict.update(resultsday9)
-new_dict.update(resultsday7)
-new_dict.update(resultsday8)
+# new_dict = {}
+# new_dict = resultsday1.copy()
+# new_dict.update(resultsday2)
+# new_dict.update(resultsday3)
+# new_dict.update(resultsday4)
+# new_dict.update(resultsday5)
+# new_dict.update(resultsday9)
+# new_dict.update(resultsday7)
+# new_dict.update(resultsday8)
+dict_list = []
+dict_list.append(resultsday1)
+dict_list.append(resultsday2)
+dict_list.append(resultsday3)
+dict_list.append(resultsday4)
+dict_list.append(resultsday5)
+dict_list.append(resultsday6)
+dict_list.append(resultsday7)
+dict_list.append(resultsday8)
+dict_list.append(resultsday9)
 
-
-
-X , y = convert_dict_to_list(new_dict)
-#clf = svm.SVC(kernel='linear', degree=3, probability=True, C=1)
-clf = svm.SVC(kernel='linear', probability=True, C=1)
-
-X1, y1 = convert_dict_to_list(resultsday6)
-
-clf.fit(X,y)
-print (y1)
-print (clf.predict(X1))
-print (clf.predict_proba(X1))
-print (clf.score(X1, y1))
-
-cm = confusion_matrix(y1, clf.predict(X1))
-
-tp = float(cm[0][0])/np.sum(cm[0])
-tn = float(cm[1][1])/np.sum(cm[1])
-print (tp)
-print (tn)
-print (float(cm[0][0])/len(np.where(clf.predict(X1)==0)[0]))
+fit_dict(dict_list,8)

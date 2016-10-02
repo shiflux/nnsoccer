@@ -117,14 +117,13 @@ def fit_dict(dict_list_v, v):
             new_dict.update(d)
 
     X , y = convert_dict_to_list(new_dict)
-    clf = svm.SVC(kernel='linear', probability=True, C=1)
+    clf = svm.SVC(kernel='linear', C=100)
 
     X1, y1 = convert_dict_to_list(dict_list[v])
 
     clf.fit(X,y)
     print (y1)
     print (clf.predict(X1))
-    print (clf.predict_proba(X1))
     print (clf.score(X1, y1))
 
     cm = confusion_matrix(y1, clf.predict(X1))

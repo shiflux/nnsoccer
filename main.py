@@ -138,15 +138,19 @@ resultsday9 = {("Auxerre","Havre"): 2, ("BourgeB","Laval"): 0, ("Clermont","Stra
                ("Valenciennes","Lens"): 2, ("Brest","Reims"): 1}
 
 new_dict = {}
-new_dict = resultsday1.copy()
-new_dict.update(resultsday2)
-new_dict.update(resultsday3)
-new_dict.update(resultsday4)
+# new_dict = resultsday1.copy()
+# new_dict.update(resultsday2)
+# new_dict.update(resultsday3)
+# new_dict.update(resultsday4)
+# new_dict.update(resultsday5)
+# new_dict.update(resultsday6)
+# new_dict.update(resultsday7)
+# new_dict.update(resultsday8)
+new_dict = resultsday4.copy()
 new_dict.update(resultsday5)
 new_dict.update(resultsday6)
 new_dict.update(resultsday7)
 new_dict.update(resultsday8)
-
 
 
 X , y = convert_dict_to_list(new_dict)
@@ -154,9 +158,6 @@ X , y = convert_dict_to_list(new_dict)
 clf = svm.SVC(kernel='linear', degree=3, probability=True, C=1)
 
 X1, y1 = convert_dict_to_list(resultsday9)
-print (X)
-print (y)
-print (X1)
 
 clf.fit(X,y)
 print (y1)

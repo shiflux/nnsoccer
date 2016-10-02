@@ -104,6 +104,26 @@ def convert_dict_to_list(dic):
 resultsday1 = {("BourgeB", "Strasburgo"): 0, ("Gazelec","Brest"): 0, ("Nimes","Laval"): 0, ("Niort","Lens"): 0, ("Orleans","Havre"): 2,
            ("Tours","Ajaccio"): 0, ("Troyes","Sochaux"): 2, ("Valenciennes","Clermont"): 1, ("RedStar","Auxerre"): 0, ("Amiens","Reims"): 0}
 
+resultsday2 = {("Ajaccio","Troyes"): 1, ("Auxerre","Gazelec"): 2, ("Brest","Orleans"): 1, ("Clermont","RedStar"): 0,
+               ("Laval","Niort"): 0, ("Havre","Nimes"): 1, ("Lens","Tours"): 0, ("Reims","BourgeB"): 1,
+               ("Sochaux","Valenciennes"): 0, ("Strasburgo","Amiens"): 1}
+
+resultsday3 = {("Amiens","Niort"): 1, ("BourgeBresse","Auxerre"): 2, ("Clermont","Sochaux"): 2, ("Gazelec","Havre"): 0,
+               ("Orleans","Ajaccio"): 1, ("RedStar","Brest"): 2, ("Tours","Strasburgo"): 2, ("Troyes","Laval"): 1,
+               ("Valenciennes","Reims"): 0, ("Nimes","Lens"): 2}
+
+resultsday4 = {("Ajaccio","BourgeB"): 1, ("Auxerre","Clermont"): 2, ("Brest","Valenciennes"): 1, ("Laval","Gazelec"): 2,
+               ("Havre","Troyes"): 2, ("Niort","Tours"): 2, ("Sochaux","Orleans"): 0, ("Strasburgo", "Nimes"): 0,
+               ("Lens","Amiens"): 2, ("Reims","RedStar"): 1}
+
+resultsday5 = {("BourgeB","Niort"): 0, ("Clermont","Ajaccio"): 1, ("Gazelec","Strasburgo"): 0, ("Nimes","Amiens"): 2,
+               ("Orleans","Auxerre"): 0, ("Tours","Reims"): 0, ("Troyes","Lens"): 0, ("Valenciennes","Laval"): 1,
+               ("RedStar","Havre"): 0, ("Sochaux","Brest"): 0}
+
+resultsday6 = {("Ajaccio","RedStar"): 2, ("Amiens","Tours"): 1, ("Auxerre","Sochaux"): 0, ("Brest","Clermont"): 2,
+               ("Laval","Orleans"): 1, ("Lens","BourgeB"): 0, ("Niort","Nimes"): 2, ("Reims","Gazelec"): 1,
+               ("Havre","Valenciennes"): 0, ("Strasburgo","Troyes"): 1}
+
 resultsday7 = {("BourgeB","Havre"):1,("Clermont","Lens"):0,("Orleans","Strasburgo"):1,("RedStar","Laval"):1, ("Sochaux","Reims"):0,
                ("Tours","Nimes"):2,("Troyes","Niort"):0,("Valenciennes","Ajaccio"):0,("Brest","Auxerre"):1,("Gazelec","Amiens"):0}
 
@@ -117,8 +137,13 @@ resultsday9 = {("Auxerre","Havre"): 2, ("BourgeB","Laval"): 0, ("Clermont","Stra
 
 new_dict = {}
 new_dict = resultsday1.copy()
+new_dict.update(resultsday2)
+new_dict.update(resultsday3)
+new_dict.update(resultsday4)
+new_dict.update(resultsday5)
+new_dict.update(resultsday6)
 new_dict.update(resultsday7)
-new_dict.update(resultsday9)
+new_dict.update(resultsday8)
 
 
 
@@ -126,20 +151,20 @@ X , y = convert_dict_to_list(new_dict)
 #clf = linear_model.LinearRegression()
 clf = svm.SVC(kernel='linear', degree=3, probability=True, C=1)
 
-X1, y1 = convert_dict_to_list(resultsday8)
-print X
-print y
-print X1
+X1, y1 = convert_dict_to_list(resultsday9)
+print (X)
+print (y)
+print (X1)
 
 clf.fit(X,y)
-print y1
-print clf.predict(X1)
-print clf.predict_proba(X1)
-print clf.score(X1, y1)
+print (y1)
+print (clf.predict(X1))
+print (clf.predict_proba(X1))
+print (clf.score(X1, y1))
 
 cm = confusion_matrix(y1, clf.predict(X1))
 
 tp = float(cm[0][0])/np.sum(cm[0])
 tn = float(cm[1][1])/np.sum(cm[1])
-print tp
-print tn
+print (tp)
+print (tn)

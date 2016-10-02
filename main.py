@@ -197,3 +197,4 @@ for x in range(9):
     results.append(fit_dict(dict_list,x))
 
 print results
+print np.mean(results)

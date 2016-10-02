@@ -156,7 +156,7 @@ new_dict.update(resultsday8)
 X , y = convert_dict_to_list(new_dict)
 #clf = linear_model.LinearRegression()
 #clf = svm.SVC(kernel='linear', degree=3, probability=True, C=1)
-clf = svm.SVC()
+clf = svm.SVC(kernel='linear', degree=3, probability=True, C=10)
 
 X1, y1 = convert_dict_to_list(resultsday9)
 

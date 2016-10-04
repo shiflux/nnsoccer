@@ -44,18 +44,19 @@ def create_training_set(train_list, features):
   for tl in train_list:
     temp_data = get_round_data(tl)
     for key in temp_data:
-      lx = (features[key[0]]+features[key[1]])
+      #lx = (features[key[0]]+features[key[1]])
+      lx =[a - b for a, b in zip(features[key[0]], features[key[1]])]
       ly = (temp_data[key])
       if ly == "":
         break
       x.append(lx)
       split_s = ly.split("-", 1)
       if int(split_s[0])< int(split_s[1]):
-        ly = 2
-      elif int(split_s[0])== int(split_s[1]):
-        ly = 1
-      elif int(split_s[0]) > int(split_s[1]):
         ly = 0
+      elif int(split_s[0])== int(split_s[1]):
+        ly = 0
+      elif int(split_s[0]) > int(split_s[1]):
+        ly = 1
       y.append(ly)
   return x, y
 
@@ -77,16 +78,17 @@ def predict(X,y,X1, C1=1):
 def create_predict_set(games_list, features):
   x = []
   for gl in games_list:
-    x.append(features[gl[0]] + features[gl[1]])
+    x.append([a - b for a, b in zip(features[gl[0]], features[gl[1]])])
+    #x.append(features[gl[0]] + features[gl[1]])
   return x
 
 def fit_test(giornata):
   features = get_features()
   x, y = create_training_set(range(1, giornata, 1), features)
   x1, y1 = create_training_set([giornata], features)
-  return fit(x, y, x1, y1, C1=1)
+  return fit(x, y, x1, y1, C1=2)
 
-def test(n1,n2):
+def test(n1=4,n2=7):
   results= []
   for x in range(n1,n2,1):
     results.append(fit_test(x))
@@ -97,6 +99,10 @@ def predict_test():
   giornata = 7
   x, y = create_training_set(range(1, giornata, 1), features)
   x1 = create_predict_set(next_games_list, features)
-  return predict(x, y, x1, C1=1)
+  return predict(x, y, x1, C1=2)
 
+
+#x, y = create_training_set([1], get_features())
+#print x
+test()
 predict_test()

@@ -117,7 +117,7 @@ def fit_dict(dict_list_v, v):
             new_dict.update(d)
 
     X , y = convert_dict_to_list(new_dict)
-    clf = svm.SVC(kernel='rbf', C=25)
+    clf = svm.SVC(kernel='linear', C=6)
 
     X1, y1 = convert_dict_to_list(dict_list[v])
 
@@ -132,6 +132,8 @@ def fit_dict(dict_list_v, v):
     tn = float(cm[1][1])/np.sum(cm[1])
     #print (tp)
     #print (tn)
+    if (len(np.where(clf.predict(X1)==0)[0])) == 0:
+	return -1
     print (float(cm[0][0])/len(np.where(clf.predict(X1)==0)[0]))
     return float(cm[0][0])/len(np.where(clf.predict(X1)==0)[0])
 
@@ -198,7 +200,9 @@ dict_list.append(resultsday10)
 
 results = []
 for x in range(10):
-    results.append(fit_dict(dict_list,x))
+    res = fit_dict(dict_list,x)
+    if res != -1:
+	results.append(res)
 
 print results
 print np.mean(results)

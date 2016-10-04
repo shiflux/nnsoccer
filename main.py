@@ -209,3 +209,39 @@ print np.mean(results)
 
 print dict_list[9]
 fit_dict(dict_list,9)
+
+new_dict = {}
+flag = True
+for d in dict_list[:5]:
+    if flag:
+        new_dict = d.copy()
+        flag = False
+    else:
+        new_dict.update(d)
+
+new_dict1 = {}
+flag = True
+for d in dict_list[5:]:
+    if flag:
+        new_dict1 = d.copy()
+        flag = False
+    else:
+        new_dict.update(d)
+
+X, y = convert_dict_to_list(new_dict)
+X1, y1 = convert_dict_to_list(new_dict1)
+C_range1 = list1 = [x*0.01 for x in range(1, 100+1)]
+C_range2 = list2 = [x for x in range(1, 30)]
+C_2d_range = C_range1 + C_range2
+gamma_2d_range = [1e-1, 1, 1e1]
+classifiers = (0,0,0)
+for C in C_2d_range:
+    for gamma in C_2d_range:
+        print C, gamma
+        clf = svm.SVC(C=C, gamma=gamma)
+        clf.fit(X, y)
+        score = clf.score(X1, y1)
+        if score > classifiers[2]:
+            classifiers = (C, gamma, score)
+
+print classifiers

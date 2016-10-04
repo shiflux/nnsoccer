@@ -3,6 +3,8 @@ from sklearn import preprocessing
 from sklearn import linear_model
 from sklearn.metrics import confusion_matrix
 import numpy as np
+from sklearn.model_selection import StratifiedShuffleSplit
+from sklearn.model_selection import GridSearchCV
 
 
 def team_converter(s):
@@ -205,3 +207,46 @@ print np.mean(results)
 
 print dict_list[9]
 fit_dict(dict_list,9)
+
+
+C_range = np.logspace(1e-2, 1, 1e2)
+gamma_range = np.logspace(1e-1, 1, 1e1)
+param_grid = dict(gamma=gamma_range, C=C_range)
+cv = StratifiedShuffleSplit(n_splits=5, test_size=0.2, random_state=42)
+grid = GridSearchCV(svm.SVC(), param_grid=param_grid, cv=cv)
+
+new_dict = {}
+flag = True
+for d in dict_list[:5]:
+    if flag:
+        new_dict = d.copy()
+        flag = False
+    else:
+        new_dict.update(d)
+
+new_dict1 = {}
+flag = True
+for d in dict_list[5:]:
+    if flag:
+        new_dict1 = d.copy()
+        flag = False
+    else:
+        new_dict.update(d)
+
+X, y = convert_dict_to_list(new_dict)
+X1, y1 = convert_dict_to_list(new_dict1)
+C_range1 = list1 = [x*0.01 for x in range(1, 100+1)]
+C_range2 = list2 = [x for x in range(1, 30)]
+C_2d_range = C_range1 + C_range2
+gamma_2d_range = [1e-1, 1, 1e1]
+classifiers = (0,0,0)
+for C in C_2d_range:
+    for gamma in C_2d_range:
+        print C, gamma
+        clf = svm.SVC(C=C, gamma=gamma)
+        clf.fit(X, y)
+        score = clf.score(X1, y1)
+        if score > classifiers[2]:
+            classifiers = (C, gamma, score)
+
+print classifiers

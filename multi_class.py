@@ -98,8 +98,12 @@ def convert_dict_to_list(dic):
         #print key[0]
         #print key[1]
         x.append(team_converter(key[0]) + team_converter(key[1]))
-        y.append(dic[key])
-
+        if dic[key]==0:
+		y.append(1)
+	if dic[key]==1:
+                y.append(0)
+  	if dic[key]==2:
+                y.append(2)
     return x, y
 
 def fit_dict(dict_list_v, v):
@@ -114,7 +118,7 @@ def fit_dict(dict_list_v, v):
             new_dict.update(d)
 
     X , y = convert_dict_to_list(new_dict)
-    clf = svm. SVC(kernel='rbf', C=24)
+    clf = svm. SVC(kernel='linear', C=1)
 
     X1, y1 = convert_dict_to_list(dict_list[v])
 

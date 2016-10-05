@@ -52,11 +52,11 @@ def create_training_set(train_list, features):
       x.append(lx)
       split_s = ly.split("-", 1)
       if int(split_s[0])< int(split_s[1]):
-        ly = 0
-      elif int(split_s[0])== int(split_s[1]):
-        ly = 0
-      elif int(split_s[0]) > int(split_s[1]):
         ly = 1
+      elif int(split_s[0])== int(split_s[1]):
+        ly = 1
+      elif int(split_s[0]) > int(split_s[1]):
+        ly = 0
       y.append(ly)
   return x, y
 
@@ -88,7 +88,7 @@ def fit_test(giornata):
   x1, y1 = create_training_set([giornata], features)
   return fit(x, y, x1, y1, C1=2)
 
-def test(n1=4,n2=7):
+def test(n1=4,n2=8):
   results= []
   for x in range(n1,n2,1):
     results.append(fit_test(x))
@@ -96,7 +96,7 @@ def test(n1=4,n2=7):
 
 def predict_test():
   features = get_features()
-  giornata = 7
+  giornata = 8
   x, y = create_training_set(range(1, giornata, 1), features)
   x1 = create_predict_set(next_games_list, features)
   return predict(x, y, x1, C1=2)
@@ -105,4 +105,4 @@ def predict_test():
 #x, y = create_training_set([1], get_features())
 #print x
 test()
-predict_test()
+#predict_test()

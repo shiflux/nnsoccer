@@ -201,7 +201,7 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     print (predicted_prob[0])
     temp_res = []
     for x in range(len(y1)):
-        if (predicted_prob[x][predicted[x]] > 0.5):
+        if predicted_prob[x][predicted[x]] > 0.5:
             if predicted[x] == y1[x]:
                 temp_res.append(1)
             else:

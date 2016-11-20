@@ -2,6 +2,7 @@ import numpy
 import unirest
 from sklearn import svm
 import settings
+threshold = 0.7
 
 
 def get_features(serie="serie-a", my_features=settings.my_global_features, season="16-17"):
@@ -201,7 +202,7 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     print (predicted_prob[0])
     temp_res = []
     for x in range(len(y1)):
-        if predicted_prob[x][predicted[x]] > 0.5:
+        if predicted_prob[x][predicted[x]] > threshold:
             if predicted[x] == y1[x]:
                 temp_res.append(1)
             else:

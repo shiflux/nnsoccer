@@ -197,8 +197,8 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     print (predicted_x)
     predicted_prob  = (clf.predict_proba(X1))
     print (predicted_prob)
-    print len(predicted_x)
-    print len(predicted_prob)
+    print (predicted_x[0])
+    print (predicted_prob[0])
     score = clf.score(X1, y1)
     return score
 

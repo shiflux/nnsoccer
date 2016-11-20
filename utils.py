@@ -193,8 +193,12 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     clf = svm.SVC(kernel='linear', C=C1, gamma=gamma, probability=True)
     clf.fit(X, y)
     print (y1)
-    print (clf.predict(X1))
-    print (clf.predict_proba(X1))
+    predicted_x  = (clf.predict(X1))
+    print (predicted_x)
+    predicted_prob  = (clf.predict_proba(X1))
+    print (predicted_prob)
+    print len(predicted_x)
+    print len(predicted_prob)
     score = clf.score(X1, y1)
     return score
 

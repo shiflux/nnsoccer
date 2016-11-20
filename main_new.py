@@ -10,8 +10,8 @@ next_games_list= [("Napoli","Roma"),("Pescara","Sampdoria"),("Juventus","Udinese
                   ("Genoa","Empoli"), ("Inter","Cagliari"),("Lazio","Bologna"),("Sassuolo","Crotone"),
                   ("Chievo","Milan"),("Palermo","Torino")]
 '''
-next_games_list= [("Chievo","Cagliari"),("Udinese","Napoli"),("Juventus","Pescara"),("Sampdoria","Sassuolo"),("Atalanta","Roma"),
-		  ("Bologna","Palermo"),("Crotone","Torino"),("Empoli","Fiorentina"),("Lazio","Genoa"),("Milan","Inter")]
+next_games_list= [("Torino","Chievo"),("Empoli","Milan"),("Palermo","Lazio"),("Bologna","Atalanta"),("Cagliari","Udinese"),
+		  ("Crotone","Sampdoria"),("Genoa","Juventus"),("Roma","Pescara"),("Napoli","Sassuolo"),("Inter","Fiorentina")]
 #x, y = create_training_set([1], get_features())
 #print x
 #utils.test(n1=1, n2=10, binar = 2, serie="serie-a", old=True, C1=0.1, gamma=0.01)

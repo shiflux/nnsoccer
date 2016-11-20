@@ -15,9 +15,9 @@ def get_features(serie="serie-a", my_features=settings.my_global_features, seaso
     r = response.body
     for st in r['data']['standings']:
         f_list=[]
-        matches_played = st["overall"]["matches_played"]
+        matches_played = st["overall"]["wins"] + st["overall"]["draws"] + st["overall"]["losts"]
         for f in my_features:
-            f_list.append(st["overall"][f]/matches_played)
+            f_list.append(1.0*st["overall"][f]/matches_played)
         temp_dict[st["team"]] = f_list
     return temp_dict
 
@@ -255,11 +255,11 @@ def test(n1=4, n2=8, binar=2, serie="serie-a", old=False, C1=2, gamma=0.2):
     return results
 
 def predict_test2(next_games_list, serie="serie-a", C1=1, gamma= 0.1):
-	x0, y0 = create_season_training_set2(serie=serie, season="15-16", div=38.0)
-	x1, y1 = create_season_training_set2(serie=serie, season="14-15", div=38.0)
+	x0, y0 = create_season_training_set2(serie=serie, season="15-16")
+	x1, y1 = create_season_training_set2(serie=serie, season="14-15")
 	x0 += x1
 	y0 += y1
-	xp = create_predict_set2(next_games_list, serie=serie, season="16-17", div=12.0)
+	xp = create_predict_set2(next_games_list, serie=serie, season="16-17")
 	pred = predict(x0, y0, xp, C1=C1, gamma=gamma)
 	return pred
 

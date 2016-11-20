@@ -15,8 +15,8 @@ def get_features(serie="serie-a", my_features=settings.my_global_features, seaso
     r = response.body
     for st in r['data']['standings']:
         f_list=[]
+        matches_played = st["overall"]["matches_played"]
         for f in my_features:
-            matches_played = st["overall"]["matches_played"]
             f_list.append(st["overall"][f]/matches_played)
         temp_dict[st["team"]] = f_list
     return temp_dict

@@ -200,9 +200,10 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
 
 
 def predict(X, y, X1, C1=2, gamma=0.01):
-    clf = svm.SVC(kernel='linear', C=C1, gamma=gamma)
+    clf = svm.SVC(kernel='linear', C=C1, gamma=gamma, probability=True)
     clf.fit(X, y)
     p = clf.predict(X1)
+    print (clf.predict_proba(X1))
     return p
 
 

@@ -190,12 +190,12 @@ def create_training_set(train_list, features, binar=2, serie="serie-a", season="
 
 
 def fit(X, y, X1, y1, C1=2, gamma=0.2):
-    clf = svm.SVC(kernel='linear', C=C1, gamma=gamma)
+    clf = svm.SVC(kernel='linear', C=C1, gamma=gamma, probability=True)
     clf.fit(X, y)
     print (y1)
     print (clf.predict(X1))
+    print (clf.predict_proba(X1))
     score = clf.score(X1, y1)
-    print score
     return score
 
 

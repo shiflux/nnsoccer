@@ -14,10 +14,11 @@ def get_features(serie="serie-a", my_features=settings.my_global_features, seaso
                            )
     r = response.body
     for st in r['data']['standings']:
-	f_list=[]
-	for f in my_features:
-		f_list.append(st["overall"][f])
-	temp_dict[st["team"]] = f_list
+        f_list=[]
+        for f in my_features:
+            matches_played = st["overall"]["matches_played"]
+            f_list.append(st["overall"][f]/matches_played)
+        temp_dict[st["team"]] = f_list
     return temp_dict
 
 
@@ -238,11 +239,11 @@ def fit_test(giornata, binar=2, serie="serie-a", old=False, C1=2, gamma=0.2):
 
 def test2(serie="serie-a", C1=0.1, gamma=0.01):
 	results = []
-	x, y = create_season_training_set2(serie=serie, season="15-16", div=38.0)
-	xx, yy = create_season_training_set2(serie=serie, season="14-15", div=38.0)
+	x, y = create_season_training_set2(serie=serie, season="15-16")
+	xx, yy = create_season_training_set2(serie=serie, season="14-15")
 	x += xx
 	y += yy
-	x1, y1 = create_season_training_set2(serie=serie, season="16-17", div=11.0)
+	x1, y1 = create_season_training_set2(serie=serie, season="16-17")
 	pred = fit(x,y,x1,y1,C1=C1, gamma=gamma)
 	return pred
 

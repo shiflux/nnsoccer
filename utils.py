@@ -200,12 +200,18 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     print (predicted[0])
     print (predicted_prob[0])
     temp_res = []
+    temp_res2 = []
     for x in range(len(y1)):
+        if predicted[x] == y1[x]:
+            temp_res2.append(1)
+        else:
+            temp_res2.append(0)
         if predicted_prob[x][predicted[x]] > 0.5:
             if predicted[x] == y1[x]:
                 temp_res.append(1)
             else:
                 temp_res.append(0)
+    print(numpy.mean(temp_res2))
     print(numpy.mean(temp_res))
     score = clf.score(X1, y1)
     return score

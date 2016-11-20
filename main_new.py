@@ -12,6 +12,8 @@ next_games_list= [("Napoli","Roma"),("Pescara","Sampdoria"),("Juventus","Udinese
 '''
 next_games_list= [("Torino","Chievo"),("Empoli","Milan"),("Palermo","Lazio"),("Bologna","Atalanta"),("Cagliari","Udinese"),
 		  ("Crotone","Sampdoria"),("Genoa","Juventus"),("Roma","Pescara"),("Napoli","Sassuolo"),("Inter","Fiorentina")]
+next_games_list= [("Chievo","Cagliari"),("Udinese","Napoli"),("Juventus","Pescara"),("Sampdoria","Sassuolo"),("Atalanta","Roma"),
+		  ("Bologna","Palermo"),("Crotone","Torino"),("Empoli","Fiorentina"),("Lazio","Genoa"),("Milan","Inter")]
 
 #x, y = create_training_set([1], get_features())
 #print x

@@ -15,12 +15,11 @@ if __name__ == "__main__":
     else:
         gamma = args.gamma
     if args.C is None:
-        C = 0.01
+        C = 3
     else:
         C = args.C
     if args.serie is None:
         serie = "serie-a"
     else:
         serie = args.serie
-    print serie
     print utils.test2(serie=serie, C1=C, gamma=gamma)

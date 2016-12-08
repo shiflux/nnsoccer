@@ -204,8 +204,6 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     print(predicted)
     predicted_prob = (clf.predict_proba(X1))
     print(predicted_prob)
-    print(predicted[0])
-    print(predicted_prob[0])
     temp_res = []
     for x in range(len(y1)):
         # if predicted_prob[x][predicted[x]] > threshold:

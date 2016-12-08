@@ -263,11 +263,7 @@ def fit_test(giornata, binar=2, serie="serie-a", old=False, C1=2, gamma=0.2):
 
 def test2(serie="serie-a", C1=0.1, gamma=0.01, lastonly = False):
     results = []
-    x, y = create_season_training_set2(serie=serie, season="15-16")
-    if not lastonly:
-        xx, yy = create_season_training_set2(serie=serie, season="14-15")
-        x += xx
-        y += yy
+    x, y = create_training_set()
     x1, y1 = create_season_training_set2(serie=serie, season="16-17")
     pred = fit(x, y, x1, y1, C1=C1, gamma=gamma)
     return pred

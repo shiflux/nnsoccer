@@ -22,7 +22,7 @@ if __name__ == "__main__":
         for line in myFile:
             if args.v:
                 print (line)
-            game = line.split(';')
+            game = line.split(',')
             print game
             if len(game) == 2:
                 my_game_list.append((game[0], game[1]))

@@ -10,7 +10,9 @@ next_games_list= [("Napoli","Roma"),("Pescara","Sampdoria"),("Juventus","Udinese
                   ("Genoa","Empoli"), ("Inter","Cagliari"),("Lazio","Bologna"),("Sassuolo","Crotone"),
                   ("Chievo","Milan"),("Palermo","Torino")]
 '''
-next_games_list= [("Crotone","Pescara"),("Sampdoria","Lazio")]
+next_games_list= [("Crotone","Pescara"),("Sampdoria","Lazio"),("Cagliari", "Napoli"), ("Atalanta", "Udinese"),
+				  ("Bologna", "Empoli"), ("Palermo", "Chievo"), ("Torni", "Juventus"), ("Inter", "Genoa"),
+				  ("Fiorentina", "Sassuolo"), ("Roma", "Milan")]
 
 #x, y = create_training_set([1], get_features())
 #print x

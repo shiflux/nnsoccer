@@ -5,7 +5,6 @@ import settings
 
 threshold = 0.3
 
-
 def get_features(serie="serie-a", my_features=settings.my_global_features, season="16-17"):
     temp_dict = {}
     response = unirest.get("http://soccer.sportsopendata.net/v1/leagues/" + serie + "/seasons/" + season + "/standings",
@@ -284,8 +283,6 @@ def predict_test2(next_games_list, serie="serie-a", C1=1, gamma=0.1):
     pred = predict(x0, y0, xp, C1=C1, gamma=gamma)
     return pred
 
-create_training_set.res = None
-
 
 def create_training_set():
     if create_training_set.res is None:
@@ -298,6 +295,8 @@ def create_training_set():
         y0 += y1
         create_training_set.res = x0, y0
     return create_training_set.res
+
+create_training_set.res = None
 
 
 def predict_test(next_games_list, serie="serie-a", iniziale=1, giornate=8, C1=1, gamma=0.01, old=False):

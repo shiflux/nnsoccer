@@ -13,17 +13,20 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.filename is not None and args.serie is not None:
         my_game_list = []
-        myFile = open(args.filename, 'r')
-        if myFile.readable():
-            for line in myFile:
-                game = line.split(';')
-                if len(game) == 2:
-                    my_game_list.append((game[0], game[1]))
-        if(args.gamma is None):
+        try:
+            myFile = open(args.filename, 'r')
+        except Exception as ex:
+            print "Error opening file: ", ex.message
+
+        for line in myFile:
+            game = line.split(';')
+            if len(game) == 2:
+                my_game_list.append((game[0], game[1]))
+        if args.gamma is None:
             gamma = 0.01
         else:
             gamma = args.gamma
-        if(args.C is None):
+        if args.C is None:
             C = 0.01
         else:
             C = args.C

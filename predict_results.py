@@ -23,6 +23,7 @@ if __name__ == "__main__":
             if args.v:
                 print (line)
             game = line.split(';')
+            print game
             if len(game) == 2:
                 my_game_list.append((game[0], game[1]))
         if args.gamma is None:

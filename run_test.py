@@ -9,6 +9,8 @@ if __name__ == "__main__":
     parser.add_argument('-serie', type=str, required=False, help='Serie (serie-a, bundesliga, ...)')
     parser.add_argument('-C', type=str, required=False, help='C parameter')
     parser.add_argument('-gamma', type=str, required=False, help='Gamma parameter')
+    parser.add_argument('-gamma', type=str, required=False, help='Gamma parameter')
+    parser.add_argument('-last', required=False, help='2015/2016 only')
     args = parser.parse_args()
     if args.gamma is None:
         gamma = 0.01
@@ -22,4 +24,4 @@ if __name__ == "__main__":
         serie = "serie-a"
     else:
         serie = args.serie
-    print utils.test2(serie=serie, C1=C, gamma=gamma)
+    print utils.test2(serie=serie, C1=C, gamma=gamma, lastonly=True)

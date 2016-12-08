@@ -142,7 +142,6 @@ def create_season_training_set2(serie="serie-a", season="16-17", div=1.0):
     #teams = get_season_teams(serie, season)
     features = get_features(serie=serie, season=season)
     rounds = get_season_rounds(serie, season)
-    print rounds
     for round in rounds:
         temp_data = get_detailed_round_data(round, serie, season)
         for match in temp_data:
@@ -280,11 +279,12 @@ def test(n1=4, n2=8, binar=2, serie="serie-a", old=False, C1=2, gamma=0.2):
     return results
 
 
-def predict_test2(next_games_list, serie="serie-a", C1=1, gamma=0.1):
+def predict_test2(next_games_list, serie="serie-a", C1=1, gamma=0.1, lastonly = False):
     x0, y0 = create_season_training_set2(serie=serie, season="15-16")
-    x1, y1 = create_season_training_set2(serie=serie, season="14-15")
-    x0 += x1
-    y0 += y1
+    if not lastonly:
+        x1, y1 = create_season_training_set2(serie=serie, season="14-15")
+        x0 += x1
+        y0 += y1
     xp = create_predict_set2(next_games_list, serie=serie, season="16-17")
     pred = predict(x0, y0, xp, C1=C1, gamma=gamma)
     return pred

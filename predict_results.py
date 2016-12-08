@@ -13,9 +13,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.filename is not None and args.serie is not None:
         my_game_list = []
-        file = open(args.flename, 'r')
-        if file.readable():
-            for line in file:
+        myFile = open(args.flename, 'r')
+        if myFile.readable():
+            for line in myFile:
                 game = line.split(';')
                 if len(game) == 2:
                     my_game_list.append((game[0], game[1]))

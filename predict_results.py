@@ -13,7 +13,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.filename is not None and args.serie is not None:
         my_game_list = []
-        myFile = open(args.flename, 'r')
+        myFile = open(args.filename, 'r')
         if myFile.readable():
             for line in myFile:
                 game = line.split(';')

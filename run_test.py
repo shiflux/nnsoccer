@@ -18,5 +18,9 @@ if __name__ == "__main__":
         C = 0.01
     else:
         C = args.C
+    if args.serie is None:
+        series = "serie-a"
+    else:
+        serie = args.serie
 
-    print utils.test2(C, gamma)
+    print utils.test2(serie=serie, C1=C, gamma=gamma)

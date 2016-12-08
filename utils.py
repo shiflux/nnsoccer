@@ -289,9 +289,9 @@ def create_training_set():
     x1, y1 = create_season_training_set2(serie="serie-a", season="14-15")
     x0 += x1
     y0 += y1
-    #x1, y1 = create_season_training_set2(serie="serie-b", season="15-16")
-    #x0 += x1
-    #y0 += y1
+    x1, y1 = create_season_training_set2(serie="serie-b", season="15-16")
+    x0 += x1
+    y0 += y1
     return x0, y0
 
 

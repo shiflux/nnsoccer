@@ -19,7 +19,7 @@ if __name__ == "__main__":
     else:
         C = args.C
     if args.serie is None:
-        series = "serie-a"
+        serie = "serie-a"
     else:
         serie = args.serie
 

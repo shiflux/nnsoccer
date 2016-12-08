@@ -24,7 +24,7 @@ if __name__ == "__main__":
             if args.v:
                 print game
             if len(game) == 2:
-                my_game_list.append(game)
+                my_game_list.append((game[0].strip().strip("/r/n"), game[1].strip().strip("/r/n")))
         if args.gamma is None:
             gamma = 0.01
         else:

@@ -16,7 +16,7 @@ if __name__ == "__main__":
         try:
             myFile = open(args.filename, 'r')
         except Exception as ex:
-            print "Error opening file: ", ex.message
+            print ("Error opening file: ", ex.message)
 
         for line in myFile:
             game = line.split(';')
@@ -31,5 +31,8 @@ if __name__ == "__main__":
         else:
             C = args.C
 
-        print (utils.predict_test2(my_game_list, serie=args.serie, C1= 3, gamma=0.01))
+        if len(my_game_list) > 0:
+            print (utils.predict_test2(my_game_list, serie=args.serie, C1= 3, gamma=0.01))
+        else:
+            print ("Error not enough games")
 

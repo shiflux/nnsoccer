@@ -216,7 +216,7 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     print(len(temp_res))
     print(numpy.mean(temp_res))
     score = clf.score(X1, y1)
-    return numpy.mean(temp_res)
+    return numpy.mean(temp_res), len(temp_res)
 
 
 def predict(X, y, X1, C1=2, gamma=0.01):
@@ -264,8 +264,7 @@ def test2(serie="serie-a", C1=0.1, gamma=0.01, lastonly = False):
     results = []
     x, y = create_training_set()
     x1, y1 = create_season_training_set2(serie=serie, season="16-17")
-    pred = fit(x, y, x1, y1, C1=C1, gamma=gamma)
-    return pred
+    return fit(x, y, x1, y1, C1=C1, gamma=gamma)
 
 
 def test(n1=4, n2=8, binar=2, serie="serie-a", old=False, C1=2, gamma=0.2):
@@ -280,8 +279,7 @@ def test(n1=4, n2=8, binar=2, serie="serie-a", old=False, C1=2, gamma=0.2):
 def predict_test2(next_games_list, serie="serie-a", C1=1, gamma=0.1):
     x0, y0 = create_training_set()
     xp = create_predict_set2(next_games_list, serie=serie, season="16-17")
-    pred = predict(x0, y0, xp, C1=C1, gamma=gamma)
-    return pred
+    return predict(x0, y0, xp, C1=C1, gamma=gamma)
 
 
 def create_training_set():

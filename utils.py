@@ -139,9 +139,10 @@ def create_season_training_set(serie="serie-a", season="16-17", div=1.0):
 
 def create_season_training_set2(serie="serie-a", season="16-17", div=1.0):
     x, y = [], []
-    teams = get_season_teams(serie, season)
+    #teams = get_season_teams(serie, season)
     features = get_features(serie=serie, season=season)
     rounds = get_season_rounds(serie, season)
+    print rounds
     for round in rounds:
         temp_data = get_detailed_round_data(round, serie, season)
         for match in temp_data:

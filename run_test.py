@@ -1,6 +1,6 @@
 import utils
 import argparse
-
+import numpy
 
 series_list = ["serie-a", "eredivisie", "premier-league"]
 ############
@@ -34,5 +34,6 @@ if __name__ == "__main__":
             res.append((s, utils.test2(serie=s, C1=C, gamma=gamma)))
         for result in res:
             print (result)
+        print (numpy.mean(result))
     else:
         print utils.test2(serie=serie, C1=C, gamma=gamma)

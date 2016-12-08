@@ -282,15 +282,21 @@ def test(n1=4, n2=8, binar=2, serie="serie-a", old=False, C1=2, gamma=0.2):
     return results
 
 
-def predict_test2(next_games_list, serie="serie-a", C1=1, gamma=0.1, lastonly = False):
-    x0, y0 = create_season_training_set2(serie=serie, season="15-16")
-    if not lastonly:
-        x1, y1 = create_season_training_set2(serie=serie, season="14-15")
-        x0 += x1
-        y0 += y1
+def predict_test2(next_games_list, serie="serie-a", C1=1, gamma=0.1):
+    x0, y0 = create_training_set()
     xp = create_predict_set2(next_games_list, serie=serie, season="16-17")
     pred = predict(x0, y0, xp, C1=C1, gamma=gamma)
     return pred
+
+def create_training_set():
+    x0, y0 = create_season_training_set2(serie="serie-a", season="15-16")
+    x1, y1 = create_season_training_set2(serie="serie-a", season="14-15")
+    x0 += x1
+    y0 += y1
+    x1, y1 = create_season_training_set2(serie="serie-b", season="15-16")
+    x0 += x1
+    y0 += y1
+    return x0, y0
 
 
 def predict_test(next_games_list, serie="serie-a", iniziale=1, giornate=8, C1=1, gamma=0.01, old=False):

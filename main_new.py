@@ -10,15 +10,12 @@ next_games_list= [("Napoli","Roma"),("Pescara","Sampdoria"),("Juventus","Udinese
                   ("Genoa","Empoli"), ("Inter","Cagliari"),("Lazio","Bologna"),("Sassuolo","Crotone"),
                   ("Chievo","Milan"),("Palermo","Torino")]
 '''
-next_games_list= [("Torino","Chievo"),("Empoli","Milan"),("Palermo","Lazio"),("Bologna","Atalanta"),("Cagliari","Udinese"),
-		  ("Crotone","Sampdoria"),("Genoa","Juventus"),("Roma","Pescara"),("Napoli","Sassuolo"),("Inter","Fiorentina")]
-next_games_list= [("Chievo","Cagliari"),("Udinese","Napoli"),("Juventus","Pescara"),("Sampdoria","Sassuolo"),("Atalanta","Roma"),
-		  ("Bologna","Palermo"),("Crotone","Torino"),("Empoli","Fiorentina"),("Lazio","Genoa"),("Milan","Inter")]
+next_games_list= [("Crotone","Pescara"),("Sampdoria","Lazio")]
 
 #x, y = create_training_set([1], get_features())
 #print x
 #utils.test(n1=1, n2=10, binar = 2, serie="serie-a", old=True, C1=0.1, gamma=0.01)
-print utils.predict_test2(next_games_list, serie="serie-a", C1= 3, gamma=0.01)
+#print utils.predict_test2(next_games_list, serie="serie-a", C1= 3, gamma=0.01)
 '''
 res = {}
 highest = -1
@@ -38,5 +35,5 @@ print ch
 print gammah
 '''
 
-#print utils.test2(C1=3, gamma=0.01)
+print utils.test2(C1=3, gamma=0.01)
 #print utils.get_season_rounds(serie="serie-a", season="14-15")

@@ -22,5 +22,5 @@ if __name__ == "__main__":
         serie = "serie-a"
     else:
         serie = args.serie
-
+    print serie
     print utils.test2(serie=serie, C1=C, gamma=gamma)

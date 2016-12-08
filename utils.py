@@ -3,7 +3,7 @@ import unirest
 from sklearn import svm
 import settings
 
-threshold = 0.25
+threshold = 0.3
 
 
 def get_features(serie="serie-a", my_features=settings.my_global_features, season="16-17"):

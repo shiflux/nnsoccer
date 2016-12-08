@@ -31,7 +31,7 @@ if __name__ == "__main__":
     if args.serie == "all":
         res = []
         for s in series_list:
-            res.append(s, utils.test2(serie=s, C1=C, gamma=gamma))
+            res.append((s, utils.test2(serie=s, C1=C, gamma=gamma)))
         for result in res:
             print (result)
     else:

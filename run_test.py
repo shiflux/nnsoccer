@@ -1,14 +1,17 @@
 import utils
 import argparse
 
+
+series_list = ["serie-a", "eredivisie", "premier-league"]
 ############
 #   MAIN   #
 ############
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Predict results from a file')
     parser.add_argument('-serie', type=str, required=False, help='Serie (serie-a, bundesliga, ...)')
-    parser.add_argument('-C', type=str, required=False, help='C parameter')
-    parser.add_argument('-gamma', type=str, required=False, help='Gamma parameter')
+    parser.add_argument('-C', type=float, required=False, help='C parameter')
+    parser.add_argument('-gamma', type=float, required=False, help='Gamma parameter')
+    parser.add_argument('-threshold', type=float, required=False, help='Threshold')
     args = parser.parse_args()
     if args.gamma is None:
         gamma = 0.01
@@ -22,4 +25,14 @@ if __name__ == "__main__":
         serie = "serie-a"
     else:
         serie = args.serie
-    print utils.test2(serie=serie, C1=C, gamma=gamma)
+    if args.threshold is not None:
+        utils.threshold = args.threshold
+
+    if args.serie == "all":
+        res = []
+        for s in series_list:
+            res.append(s, utils.test2(serie=s, C1=C, gamma=gamma))
+        for result in res:
+            print (result)
+    else:
+        print utils.test2(serie=serie, C1=C, gamma=gamma)

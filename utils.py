@@ -216,7 +216,7 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     print(len(temp_res))
     print(numpy.mean(temp_res))
     score = clf.score(X1, y1)
-    return temp_res
+    return numpy.mean(temp_res)
 
 
 def predict(X, y, X1, C1=2, gamma=0.01):

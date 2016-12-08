@@ -284,15 +284,20 @@ def predict_test2(next_games_list, serie="serie-a", C1=1, gamma=0.1):
     pred = predict(x0, y0, xp, C1=C1, gamma=gamma)
     return pred
 
+create_training_set.res = None
+
+
 def create_training_set():
-    x0, y0 = create_season_training_set2(serie="serie-a", season="15-16")
-    x1, y1 = create_season_training_set2(serie="serie-a", season="14-15")
-    x0 += x1
-    y0 += y1
-    x1, y1 = create_season_training_set2(serie="serie-b", season="15-16")
-    x0 += x1
-    y0 += y1
-    return x0, y0
+    if create_training_set.res is None:
+        x0, y0 = create_season_training_set2(serie="serie-a", season="15-16")
+        x1, y1 = create_season_training_set2(serie="serie-a", season="14-15")
+        x0 += x1
+        y0 += y1
+        x1, y1 = create_season_training_set2(serie="serie-b", season="15-16")
+        x0 += x1
+        y0 += y1
+        create_training_set.res = x0, y0
+    return create_training_set.res
 
 
 def predict_test(next_games_list, serie="serie-a", iniziale=1, giornate=8, C1=1, gamma=0.01, old=False):

@@ -147,6 +147,8 @@ def create_season_training_set2(serie="serie-a", season="16-17", div=1.0):
         for match in temp_data:
             homet = match[0]
             awayt = match[1]
+            if not (features.has_key(homet) and features.has_key(awayt)):
+                continue
             lx = features[homet] + features[awayt]
             lx = [a / div for a in lx]
             ly = temp_data[match]

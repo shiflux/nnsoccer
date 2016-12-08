@@ -8,6 +8,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Predict results from a file')
     parser.add_argument('filename', type=str, help='Games to predict')
     parser.add_argument('-serie', type=str, required=False, help='Serie (serie-a, bundesliga, ...)')
+    parser.add_argument('-v', type=bool, required=False, help='Verbose')
     parser.add_argument('-C', type=str, required=False, help='C parameter')
     parser.add_argument('-gamma', type=str, required=False, help='Gamma parameter')
     args = parser.parse_args()
@@ -19,6 +20,8 @@ if __name__ == "__main__":
             print ("Error opening file: ", ex.message)
 
         for line in myFile:
+            if args.v:
+                print (line)
             game = line.split(';')
             if len(game) == 2:
                 my_game_list.append((game[0], game[1]))

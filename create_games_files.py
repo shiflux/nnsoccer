@@ -15,10 +15,10 @@ def read_games(round, serie="serie-a", season="16-17"):
                            )
     r = response.body
     g_list = []
-    for match in r['data']['matches']['match_slug']:
-        match = match.split('-')
-        if match == 2:
-            g_list.append((match[0],match[1]))
+    for match in r['data']['matches']:
+        m = match['match_slug'].split('-')
+        if m == 2:
+            g_list.append((m[0], m[1]))
     return g_list
 
 
@@ -46,7 +46,6 @@ if __name__ == "__main__":
                            }
                            )
     r = response.body
-    print r['data']['rounds'][0]
     round = r['data']['rounds'][args.round-1]['round_slug']
     games = read_games(round, args.serie, season)
 

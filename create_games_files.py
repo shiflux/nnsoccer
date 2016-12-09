@@ -2,6 +2,8 @@ import argparse
 import unirest
 import settings
 import os
+import sys
+
 
 def read_games(round, serie="serie-a", season="16-17"):
     response = unirest.get("http://soccer.sportsopendata.net/v1/leagues/" + serie + "/seasons/" + season + "/rounds/"
@@ -29,7 +31,7 @@ if __name__ == "__main__":
 
     if args.round < 1:
         print ("Round must be higher than 0")
-        os.
+        sys.exit(0)
 
     if args.season is None:
         season = "16-17"

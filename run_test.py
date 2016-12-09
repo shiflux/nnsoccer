@@ -34,7 +34,6 @@ if __name__ == "__main__":
             res.append((s, utils.test2(serie=s, C1=C, gamma=gamma)))
         for result in res:
             print (result)
-        print [prob[1] for prob in result]
-        print (numpy.mean([prob[1][0] for prob in result]))
+        print (numpy.mean([prob[1][0] for prob in res]))
     else:
         print utils.test2(serie=serie, C1=C, gamma=gamma)

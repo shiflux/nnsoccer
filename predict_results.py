@@ -22,7 +22,7 @@ if __name__ == "__main__":
             stocks = myFile.read().splitlines()
 
             for line in stocks:
-                game = line.encode('ascii').split(';')
+                game = line.encode('utf-8').split(';')
                 if args.v:
                     print game
                 if len(game) == 2:

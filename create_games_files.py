@@ -3,8 +3,8 @@ import unirest
 import settings
 import os
 import sys
-#reload(sys)
-#sys.setdefaultencoding('utf-8')
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 def read_games(round, serie="serie-a", season="16-17"):
@@ -52,5 +52,5 @@ if __name__ == "__main__":
     with open("games_" + args.serie + ".txt", 'w+') as myFile:
         #myFile.truncate()
         for game in games:
-            myFile.write(game[0]+';'.encode('utf-8')+game[1]+os.linesep)
+            myFile.write(game[0]+';'+game[1]+os.linesep)
     print ("Wrote games to file " + myFile.name)

@@ -5,7 +5,22 @@ import settings
 
 threshold = 0.3
 
-
+def get_features(serie="serie-a", my_features=settings.my_global_features, season="16-17"):
+    temp_dict = {}
+    response = unirest.get("http://soccer.sportsopendata.net/v1/leagues/" + serie + "/seasons/" + season + "/standings",
+                           headers={
+                               "X-Mashape-Key": settings.mashape_key,
+                               "Accept": "application/json"
+                           }
+                           )
+    r = response.body
+    for st in r['data']['standings']:
+        f_list = []
+        matches_played = st["overall"]["wins"] + st["overall"]["draws"] + st["overall"]["losts"]
+        for f in my_features:
+            f_list.append(1.0 * st["overall"][f] / matches_played)
+        temp_dict[st["team"]] = f_list
+    return temp_dict
 
 
 def get_round_data(giornata, serie="serie-a", season="16-17"):

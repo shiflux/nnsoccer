@@ -18,6 +18,7 @@ if __name__ == "__main__":
             stocks = myFile.read().splitlines()
 
             for line in stocks:
+                print line
                 game = line.split(',')
                 if args.v:
                     print game

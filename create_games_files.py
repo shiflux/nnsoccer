@@ -32,7 +32,7 @@ if __name__ == "__main__":
         season = args.season
 
     response = unirest.get("http://soccer.sportsopendata.net/v1/leagues/" + args.serie + "/seasons/" + season +
-                           "/rounds/",
+                           "/rounds",
                            headers={
                                "X-Mashape-Key": settings.mashape_key,
                                "Accept": "application/json"

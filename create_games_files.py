@@ -17,8 +17,7 @@ def read_games(round, serie="serie-a", season="16-17"):
     g_list = []
     for match in r['data']['matches']:
         m = match['match_slug'].split('-')
-        print m
-        if m == 2:
+        if len(m) == 2:
             g_list.append((m[0], m[1]))
     return g_list
 
@@ -53,6 +52,5 @@ if __name__ == "__main__":
     with open("games_" + args.serie + ".txt", 'w+') as myFile:
         #myFile.truncate()
         for game in games:
-            print game[0]+';'+game[1]
             myFile.write(game[0]+';'+game[1]+os.linesep)
     print ("Wrote games to file " + myFile.name)

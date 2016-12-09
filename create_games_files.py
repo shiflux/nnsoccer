@@ -22,7 +22,7 @@ def read_games(round, serie="serie-a", season="16-17"):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Predict results from a file')
-    parser.add_argument('serie', type=str, required=True, help='Serie (serie-a, bundesliga, ...)')
+    parser.add_argument('serie', type=str, help='Serie (serie-a, bundesliga, ...)')
     parser.add_argument('-season', type=str, required=False, help='Season (16-17, ...)')
     args = parser.parse_args()
 

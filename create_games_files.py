@@ -49,8 +49,9 @@ if __name__ == "__main__":
     round = r['data']['rounds'][args.round-1]['round_slug']
     games = read_games(round, args.serie, season)
 
-    with open("games_" + args.serie, 'w+') as myFile:
+    with open("games_" + args.serie + ".txt", 'w+') as myFile:
         #myFile.truncate()
         for game in games:
+            print game[0]+';'+game[1]
             myFile.write(game[0]+';'+game[1]+os.linesep)
     print ("Wrote games to file games_" + args.serie)

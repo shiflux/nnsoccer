@@ -7,7 +7,7 @@ import sys
 
 def read_games(round, serie="serie-a", season="16-17"):
     response = unirest.get("http://soccer.sportsopendata.net/v1/leagues/" + serie + "/seasons/" + season + "/rounds/"
-                           + round + "matches",
+                           + round + "/matches",
                            headers={
                                "X-Mashape-Key": settings.mashape_key,
                                "Accept": "application/json"

@@ -2,6 +2,7 @@ import numpy
 import unirest
 from sklearn import svm
 import settings
+import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 

@@ -39,7 +39,7 @@ if __name__ == "__main__":
                            }
                            )
     r = response.body
-    print r['data']['rounds']
+    print r['data']['rounds']['round_slug']
     round = r['data']['rounds']['round_slug']
     games = read_games(round, args.serie, season)
 

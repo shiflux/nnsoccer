@@ -20,11 +20,12 @@ if __name__ == "__main__":
             print ("Error opening file: ", ex.message)
 
         for line in myFile:
+            line = line.strip("/r/n")
             game = line.split(',')
             if args.v:
                 print game
             if len(game) == 2:
-                my_game_list.append((game[0].strip().strip("/r/n"), game[1].strip().strip("/r/n")))
+                my_game_list.append((game[0].strip(), game[1].strip()))
         if args.gamma is None:
             gamma = 0.01
         else:

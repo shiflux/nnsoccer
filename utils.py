@@ -211,7 +211,7 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     temp_res = []
     for x in range(len(y1)):
         # if predicted_prob[x][predicted[x]] > threshold:
-        if numpy.absolute(predicted_prob[x][0] - predicted_prob[x][2]) > threshold:
+        if numpy.absolute(predicted_prob[x][0] - predicted_prob[x][2]) > threshold and numpy.absolute(predicted_prob[x][predicted[x]]- predicted_prob[x][1]) > threshold:
             if predicted[x] == y1[x]:
                 temp_res.append(1)
             else:

@@ -1,5 +1,8 @@
 import utils
 import argparse
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 #todo
 ############http://soccer.sportsopendata.net/v1/leagues/serie-a/seasons/16-17/rounds/round-16/matches
 #   MAIN   #

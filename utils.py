@@ -2,6 +2,8 @@ import numpy
 import unirest
 from sklearn import svm
 import settings
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 threshold = 0.3
 

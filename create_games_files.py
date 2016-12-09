@@ -23,8 +23,13 @@ def read_games(round, serie="serie-a", season="16-17"):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Predict results from a file')
     parser.add_argument('serie', type=str, help='Serie (serie-a, bundesliga, ...)')
+    parser.add_argument('-round', type=int, required=True, help='Round (1, 2, 3, ...)')
     parser.add_argument('-season', type=str, required=False, help='Season (16-17, ...)')
     args = parser.parse_args()
+
+    if args.round < 1:
+        print ("Round must be higher than 0")
+        os.
 
     if args.season is None:
         season = "16-17"
@@ -39,8 +44,8 @@ if __name__ == "__main__":
                            }
                            )
     r = response.body
-    print r['data']['rounds']['round_slug']
-    round = r['data']['rounds']['round_slug']
+    print r['data']['rounds'][0]
+    round = r['data']['rounds'][args.round-1]['round_slug']
     games = read_games(round, args.serie, season)
 
     with open("games_" + args.serie) as myFile:

@@ -3,6 +3,8 @@ import unirest
 import settings
 import os
 import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 def read_games(round, serie="serie-a", season="16-17"):

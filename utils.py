@@ -6,7 +6,8 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-threshold = 0.3
+threshold = 0
+max_threshold = 1
 
 def get_features(serie="serie-a", my_features=settings.my_global_features, season="16-17"):
     temp_dict = {}

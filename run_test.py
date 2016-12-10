@@ -12,6 +12,7 @@ if __name__ == "__main__":
     parser.add_argument('-C', type=float, required=False, help='C parameter')
     parser.add_argument('-gamma', type=float, required=False, help='Gamma parameter')
     parser.add_argument('-threshold', type=float, required=False, help='Threshold')
+    parser.add_argument('-maxthreshold', type=float, required=False, help='Max Threshold')
     args = parser.parse_args()
     if args.gamma is None:
         gamma = 0.01
@@ -27,6 +28,8 @@ if __name__ == "__main__":
         serie = args.serie
     if args.threshold is not None:
         utils.threshold = args.threshold
+    if args.maxthreshold is not None:
+        utils.max_threshold = args.maxthreshold
 
     if args.serie == "all":
         res = []

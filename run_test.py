@@ -40,3 +40,7 @@ if __name__ == "__main__":
         print (numpy.mean([prob[1][0] for prob in res]))
     else:
         print utils.test2(serie=serie, C1=C, gamma=gamma)
+
+    print ("Number of 0: " + utils.list_of_0)
+    print ("Number of 1: " + utils.list_of_1)
+    print ("Number of 2: " + utils.list_of_2)

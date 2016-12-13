@@ -3,11 +3,13 @@ import unirest
 from sklearn import svm
 import settings
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 threshold = 0
 max_threshold = 1
+
 
 def get_features(serie="serie-a", my_features=settings.my_global_features, season="16-17"):
     temp_dict = {}
@@ -142,7 +144,7 @@ def create_season_training_set(serie="serie-a", season="16-17", div=1.0):
 
 def create_season_training_set2(serie="serie-a", season="16-17", div=1.0):
     x, y = [], []
-    #teams = get_season_teams(serie, season)
+    # teams = get_season_teams(serie, season)
     features = get_features(serie=serie, season=season)
     rounds = get_season_rounds(serie, season)
     for round in rounds:
@@ -212,13 +214,16 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     temp_res = []
     for x in range(len(y1)):
         # if predicted_prob[x][predicted[x]] > threshold:
-        flag1 = numpy.absolute(predicted_prob[x][predicted[x]] - predicted_prob[x][(predicted[x]+1)%3])
-        flag2 = numpy.absolute(predicted_prob[x][predicted[x]]- predicted_prob[x][(predicted[x]+2)%3])
-        if max_threshold > flag1 >= threshold and max_threshold > flag2 >= threshold:
-            if predicted[x] == y1[x]:
+        flag1 = numpy.absolute(predicted_prob[x][predicted[x]] - predicted_prob[x][(predicted[x] + 1) % 3])
+        flag2 = numpy.absolute(predicted_prob[x][predicted[x]] - predicted_prob[x][(predicted[x] + 2) % 3])
+        if predicted[x] == 1:
+            if [x][predicted[x]] >= 0.3 and flag1 <= 0.45 and flag2 <= 0.45:
                 temp_res.append(1)
-            else:
-                temp_res.append(0)
+            elif max_threshold > flag1 >= threshold and max_threshold > flag2 >= threshold:
+                if predicted[x] == y1[x]:
+                    temp_res.append(1)
+                else:
+                    temp_res.append(0)
     print(len(temp_res))
     print(numpy.mean(temp_res))
     score = clf.score(X1, y1)
@@ -266,7 +271,7 @@ def fit_test(giornata, binar=2, serie="serie-a", old=False, C1=2, gamma=0.2):
     return fit(x, y, x1, y1, C1=C1, gamma=gamma)
 
 
-def test2(serie="serie-a", C1=0.1, gamma=0.01, lastonly = False):
+def test2(serie="serie-a", C1=0.1, gamma=0.01, lastonly=False):
     results = []
     x, y = create_training_set()
     x1, y1 = create_season_training_set2(serie=serie, season="16-17")
@@ -299,6 +304,7 @@ def create_training_set():
         y0 += y1
         create_training_set.res = x0, y0
     return create_training_set.res
+
 
 create_training_set.res = None
 

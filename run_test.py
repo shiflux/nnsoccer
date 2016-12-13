@@ -38,7 +38,7 @@ if __name__ == "__main__":
     else:
         res.append(serie, utils.test2(serie=serie, C1=C, gamma=gamma))
     for result in res:
-        print (result[0], numpy.mean(result[1]))
+        print (result[0], numpy.mean(result[1]), len(result[1]))
     print (numpy.mean([numpy.mean(prob[1]) for prob in res]))
 
     print ("Number of 1: " + str(len(utils.fit.list_of_0)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_0)))

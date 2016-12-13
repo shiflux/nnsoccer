@@ -41,6 +41,6 @@ if __name__ == "__main__":
     else:
         print utils.test2(serie=serie, C1=C, gamma=gamma)
 
-    print ("Number of 0: " + str(sum(utils.list_of_0)) + " - accuracy: " + str(numpy.mean(utils.list_of_0)))
-    print ("Number of 1: " + str(sum(utils.list_of_1)) + " - accuracy: " + str(numpy.mean(utils.list_of_1)))
-    print ("Number of 2: " + str(sum(utils.list_of_2)) + " - accuracy: " + str(numpy.mean(utils.list_of_2)))
+    print ("Number of 0: " + str(sum(utils.fit.list_of_0)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_0)))
+    print ("Number of 1: " + str(sum(utils.fit.list_of_1)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_1)))
+    print ("Number of 2: " + str(sum(utils.fit.list_of_2)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_2)))

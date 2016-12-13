@@ -36,11 +36,11 @@ if __name__ == "__main__":
         for s in series_list:
             res.append((s, utils.test2(serie=s, C1=C, gamma=gamma)))
         for result in res:
-            print (result)
-        print (numpy.mean([prob[1][0] for prob in res]))
+            print (result[0], numpy.mean(result[1]))
+        print (numpy.mean([numpy.mean(prob[1]) for prob in res]))
     else:
         print utils.test2(serie=serie, C1=C, gamma=gamma)
 
-    print ("Number of 0: " + str(sum(utils.fit.list_of_0)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_0)))
-    print ("Number of 1: " + str(sum(utils.fit.list_of_1)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_1)))
-    print ("Number of 2: " + str(sum(utils.fit.list_of_2)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_2)))
+    #print ("Number of 0: " + str(sum(utils.fit.list_of_0)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_0)))
+    #print ("Number of 1: " + str(sum(utils.fit.list_of_1)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_1)))
+    #print ("Number of 2: " + str(sum(utils.fit.list_of_2)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_2)))

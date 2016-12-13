@@ -31,18 +31,16 @@ if __name__ == "__main__":
     if args.maxthreshold is not None:
         utils.max_threshold = args.maxthreshold
 
+    res = []
     if args.serie == "all":
-        res = []
         for s in series_list:
             res.append((s, utils.test2(serie=s, C1=C, gamma=gamma)))
-        for result in res:
-            print (result[0], numpy.mean(result[1]))
-        print (numpy.mean([numpy.mean(prob[1]) for prob in res]))
     else:
-        print utils.test2(serie=serie, C1=C, gamma=gamma)
+        res.append(serie, utils.test2(serie=serie, C1=C, gamma=gamma))
+    for result in res:
+        print (result[0], numpy.mean(result[1]))
+    print (numpy.mean([numpy.mean(prob[1]) for prob in res]))
 
-    print [mn0[1] for mn0 in res][0]
-    print ("Number of 0: " + str(len([e0 for e0 in [mn0[1] for mn0 in res][0] if e0 == 0])) + " - accuracy: " +
-           str(numpy.mean([e0 for e0 in [mn0[1] for mn0 in res][0] if e0 == 0][0])))
-    #print ("Number of 1: " + str(sum(utils.fit.list_of_1)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_1)))
-    #print ("Number of 2: " + str(sum(utils.fit.list_of_2)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_2)))
+    print ("Number of 1: " + str(sum(utils.fit.list_of_1)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_1)))
+    print ("Number of 1: " + str(sum(utils.fit.list_of_1)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_1)))
+    print ("Number of 2: " + str(sum(utils.fit.list_of_2)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_2)))

@@ -221,15 +221,24 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
                     temp_res.append(1)
                 else:
                     temp_res.append(0)
+                fit.list_of_1.append(temp_res[-1])
         elif max_threshold > flag1 >= threshold and max_threshold > flag2 >= threshold:
             if predicted[x] == y1[x]:
                 temp_res.append(1)
             else:
                 temp_res.append(0)
+            if predicted[x] == 0:
+                fit.list_of_0.append(temp_res[-1])
+            else:
+                fit.list_of_2.append(temp_res[-1])
     print(len(temp_res))
     print(numpy.mean(temp_res))
     score = clf.score(X1, y1)
     return temp_res
+
+fit.list_of_0 = []
+fit.list_of_1 = []
+fit.list_of_2 = []
 
 
 

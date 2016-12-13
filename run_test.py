@@ -41,6 +41,6 @@ if __name__ == "__main__":
     else:
         print utils.test2(serie=serie, C1=C, gamma=gamma)
 
-    print ("Number of 0: " + utils.list_of_0)
-    print ("Number of 1: " + utils.list_of_1)
-    print ("Number of 2: " + utils.list_of_2)
+    print ("Number of 0: " + ''.join(utils.list_of_0))
+    print ("Number of 1: " ''.join(utils.list_of_1))
+    print ("Number of 2: " ''.join(utils.list_of_2))

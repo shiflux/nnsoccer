@@ -218,7 +218,10 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
         flag2 = numpy.absolute(predicted_prob[x][predicted[x]] - predicted_prob[x][(predicted[x] + 2) % 3])
         if predicted[x] == 1:
             if predicted_prob[x][predicted[x]] >= 0.3 and flag1 <= 0.45 and flag2 <= 0.45:
-                temp_res.append(1)
+                if predicted[x] == y1[x]:
+                    temp_res.append(1)
+            else:
+                temp_res.append(0)
         elif max_threshold > flag1 >= threshold and max_threshold > flag2 >= threshold:
             if predicted[x] == y1[x]:
                 temp_res.append(1)

@@ -212,25 +212,17 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     print(predicted_prob)
     temp_res = []
     for x in range(len(y1)):
-        if 0.4 > predicted_prob[x][predicted[0]] > 0.25 and  0.4 > predicted_prob[x][predicted[2]] > 0.25 and predicted_prob[x][predicted[0]] > 0.3:
-            if predicted[x] == y1[x]:
-                temp_res.append(1)
-            else:
-                temp_res.append(0)
-            fit.list_of_1.append(temp_res[-1])
-            continue
-
         flag1 = numpy.absolute(predicted_prob[x][predicted[x]] - predicted_prob[x][(predicted[x] + 1) % 3])
         flag2 = numpy.absolute(predicted_prob[x][predicted[x]] - predicted_prob[x][(predicted[x] + 2) % 3])
-
-        if predicted[x] == 1:
-            if max_threshold > predicted_prob[x][1] >= threshold:
-                if predicted[x] == y1[x]:
-                    temp_res.append(1)
-                else:
-                    temp_res.append(0)
-                fit.list_of_1.append(temp_res[-1])
-        elif max_threshold > flag1 >= threshold and max_threshold > flag2 >= threshold:
+        #
+        # if predicted[x] == 1:
+        #     if max_threshold > predicted_prob[x][1] >= threshold:
+        #         if predicted[x] == y1[x]:
+        #             temp_res.append(1)
+        #         else:
+        #             temp_res.append(0)
+        #         fit.list_of_1.append(temp_res[-1])
+        if max_threshold > flag1 >= threshold and max_threshold > flag2 >= threshold:
             if predicted[x] == y1[x]:
                 temp_res.append(1)
             else:

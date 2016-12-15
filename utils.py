@@ -217,6 +217,7 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
                 temp_res.append(1)
             else:
                 temp_res.append(0)
+            fit.list_of_1.append(temp_res[-1])
             continue
 
         flag1 = numpy.absolute(predicted_prob[x][predicted[x]] - predicted_prob[x][(predicted[x] + 1) % 3])

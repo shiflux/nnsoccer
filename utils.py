@@ -222,7 +222,8 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
         #         else:
         #             temp_res.append(0)
         #         fit.list_of_1.append(temp_res[-1])
-        if max_threshold > flag1 >= threshold and max_threshold > flag2 >= threshold:
+        #if max_threshold > flag1 >= threshold and max_threshold > flag2 >= threshold:
+        if max_threshold > predicted_prob[x][predicted[x]] >= threshold:
             if predicted[x] == y1[x]:
                 temp_res.append(1)
             else:

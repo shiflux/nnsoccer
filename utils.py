@@ -229,6 +229,8 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
                 temp_res.append(0)
             if predicted[x] == 0:
                 fit.list_of_0.append(temp_res[-1])
+            elif predicted[x] == 1:
+                fit.list_of_1.append(temp_res[-1])
             else:
                 fit.list_of_2.append(temp_res[-1])
     print(len(temp_res))

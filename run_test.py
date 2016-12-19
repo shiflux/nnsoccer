@@ -2,7 +2,7 @@ import utils
 import argparse
 import numpy
 
-series_list = ["serie-a", "premier-league","liga"]
+series_list = ["serie-a", "srie-b", "premier-league","liga"]
 ############
 #   MAIN   #
 ############

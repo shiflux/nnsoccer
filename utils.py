@@ -147,6 +147,7 @@ def create_season_training_set2(serie="serie-a", season="16-17", div=1.0):
     features = get_features(serie=serie, season=season)
     rounds = get_season_rounds(serie, season)
     for round in rounds:
+        print round
         temp_data = get_detailed_round_data(round, serie, season)
         for match in temp_data:
             homet = match[0]
@@ -154,7 +155,6 @@ def create_season_training_set2(serie="serie-a", season="16-17", div=1.0):
             if not (features.has_key(homet) and features.has_key(awayt)):
                 continue
             lx = features[homet] + features[awayt]
-            print lx
             lx = [a / div for a in lx]
             ly = temp_data[match]
             if ly == "":

@@ -154,6 +154,7 @@ def create_season_training_set2(serie="serie-a", season="16-17", div=1.0):
             if not (features.has_key(homet) and features.has_key(awayt)):
                 continue
             lx = features[homet] + features[awayt]
+            print lx
             lx = [a / div for a in lx]
             ly = temp_data[match]
             if ly == "":
@@ -290,7 +291,7 @@ def fit_test(giornata, binar=2, serie="serie-a", old=False, C1=2, gamma=0.2):
 def test2(serie="serie-a", C1=0.1, gamma=0.01, lastonly=False):
     results = []
     x, y = create_training_set()
-    #x1, y1 = create_season_training_set2(serie=serie, season="16-17")
+    x1, y1 = create_season_training_set2(serie=serie, season="16-17")
     return fit(x, y, x1, y1, C1=C1, gamma=gamma)
 
 

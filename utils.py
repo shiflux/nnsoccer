@@ -142,7 +142,6 @@ def create_season_training_set(serie="serie-a", season="16-17", div=1.0):
 
 
 def create_season_training_set2(serie="serie-a", season="16-17", div=1.0):
-    last_game_dict = {}
     x, y = [], []
     # teams = get_season_teams(serie, season)
     features = get_features(serie=serie, season=season)
@@ -167,19 +166,6 @@ def create_season_training_set2(serie="serie-a", season="16-17", div=1.0):
                 ly = 1
             else:
                 ly = 0
-
-            if last_game_dict.has_key(homet):
-                lx.append(last_game_dict[homet])
-            else:
-                lx.append(0)
-
-            if last_game_dict.has_key(awayt):
-                lx.append(last_game_dict[awayt])
-            else:
-                lx.append(0)
-
-            last_game_dict[homet] = 2 - ly
-            last_game_dict[awayt] = ly
 
             x.append(lx)
             y.append(ly)

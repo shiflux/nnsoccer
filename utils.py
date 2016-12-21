@@ -169,14 +169,14 @@ def create_season_training_set2(serie="serie-a", season="16-17", div=1.0):
                 ly = 0
 
             if last_game_dict.has_key(homet):
-                ly.append(last_game_dict[homet])
+                lx.append(last_game_dict[homet])
             else:
-                ly.append(0)
+                lx.append(0)
 
             if last_game_dict.has_key(awayt):
-                ly.append(last_game_dict[awayt])
+                lx.append(last_game_dict[awayt])
             else:
-                ly.append(0)
+                lx.append(0)
 
             last_game_dict[homet] = 2 - ly
             last_game_dict[awayt] = ly

@@ -37,7 +37,7 @@ if __name__ == "__main__":
                 C = args.C
 
             if len(my_game_list) > 0:
-                print (utils.predict_test2(my_game_list, serie=args.serie, C1= 3, gamma=0.01))
+                print (utils.predict_test(my_game_list, serie=args.serie, C1= 3, gamma=0.01))
             else:
                 print ("Error not enough games")
 

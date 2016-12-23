@@ -172,6 +172,35 @@ def create_season_training_set2(serie="serie-a", season="16-17", div=1.0):
     return x, y
 
 
+def create_season_training_set_goalnogoal(serie="serie-a", season="16-17"):
+    x, y = [], []
+    # teams = get_season_teams(serie, season)
+    features = get_features(serie=serie, season=season)
+    rounds = get_season_rounds(serie, season)
+    for round in rounds:
+        temp_data = get_detailed_round_data(round, serie, season)
+        for match in temp_data:
+            homet = match[0]
+            awayt = match[1]
+            if not (features.has_key(homet) and features.has_key(awayt)):
+                continue
+            lx = features[homet] + features[awayt]
+            lx = [a for a in lx]
+            ly = temp_data[match]
+            if ly == "":
+                break
+            split_ly = ly.split("-", 1)
+
+            if int(split_ly[0]) > 0 and int(split_ly[1] > 0):
+                ly = 1
+            else:
+                ly = 0
+
+            x.append(lx)
+            y.append(ly)
+    return x, y
+
+
 def create_training_set(train_list, features, binar=2, serie="serie-a", season="16-17", div=1.0):
     x, y = [], []
     div = div
@@ -287,23 +316,20 @@ def fit_test(giornata, binar=2, serie="serie-a", old=False, C1=2, gamma=0.2):
     return fit(x, y, x1, y1, C1=C1, gamma=gamma)
 
 
-def test2(serie="serie-a", C1=0.1, gamma=0.01, lastonly=False):
+def test(serie="serie-a", C1=0.1, gamma=0.01, lastonly=False):
     results = []
     x, y = create_training_set()
     x1, y1 = create_season_training_set2(serie=serie, season="16-17")
     return fit(x, y, x1, y1, C1=C1, gamma=gamma)
 
-
-def test(n1=4, n2=8, binar=2, serie="serie-a", old=False, C1=2, gamma=0.2):
+def testgoalnogoal(serie="serie-a", C1=0.1, gamma=0.01, lastonly=False):
     results = []
-    for x in range(n1, n2, 1):
-        results.append(fit_test(x, binar, serie, old=old, C1=C1, gamma=gamma))
-    print
-    numpy.mean(results)
-    return results
+    x, y = create_training_set_goalnogoal()
+    x1, y1 = create_season_training_set_goalnogoal(serie=serie, season="16-17")
+    return fit(x, y, x1, y1, C1=C1, gamma=gamma)
 
 
-def predict_test2(next_games_list, serie="serie-a", C1=1, gamma=0.1):
+def predict_test(next_games_list, serie="serie-a", C1=1, gamma=0.1):
     x0, y0 = create_training_set()
     xp = create_predict_set2(next_games_list, serie=serie, season="16-17")
     return predict(x0, y0, xp, C1=C1, gamma=gamma)
@@ -321,31 +347,20 @@ def create_training_set():
         create_training_set.res = x0, y0
     return create_training_set.res
 
-
 create_training_set.res = None
 
 
-def predict_test(next_games_list, serie="serie-a", iniziale=1, giornate=8, C1=1, gamma=0.01, old=False):
-    features = get_features(serie=serie)
-    featuresold = get_features(serie=serie, season="15-16")
-    x0, y0 = create_training_set(range(iniziale, giornate, 1), features, binar=0, serie=serie, div=8.0)
-    x00, y00 = create_training_set(range(iniziale, giornate, 1), featuresold, binar=0, serie=serie, season="15-16",
-                                   div=38.0)
-    x1, y1 = create_training_set(range(iniziale, giornate, 1), features, binar=1, serie=serie, div=8.0)
-    x11, y11 = create_training_set(range(iniziale, giornate, 1), featuresold, binar=1, serie=serie, season="15-16",
-                                   div=38.0)
-    x22, y22 = create_training_set(range(iniziale, giornate, 1), featuresold, binar=2, serie=serie, season="15-16",
-                                   div=38.0)
-    x2, y2 = create_training_set(range(iniziale, giornate, 1), features, binar=2, serie=serie, div=8.0)
-    xp = create_predict_set(next_games_list, features, div=8.0)
+def create_training_set_goalnogoal():
+    if create_training_set.res is None:
+        x0, y0 = create_season_training_set_goalnogoal(serie="serie-a", season="15-16")
+        x1, y1 = create_season_training_set_goalnogoal(serie="serie-a", season="14-15")
+        x0 += x1
+        y0 += y1
+        x1, y1 = create_season_training_set_goalnogoal(serie="serie-b", season="15-16")
+        x0 += x1
+        y0 += y1
+        create_training_set_goalnogoal.res = x0, y0
+    return create_training_set_goalnogoal.res
 
-    pred0 = predict(x0 + x00, y0 + y00, xp, C1=C1, gamma=gamma)
-    pred1 = predict(x1 + x11, y1 + y11, xp, C1=C1, gamma=gamma)
-    pred2 = predict(x2 + x22, y2 + y22, xp, C1=C1, gamma=gamma)
-    print
-    pred0
-    print
-    pred1
-    print
-    pred2
-    return [(float(a) + float(b) + (float(c) / 2.0)) / 1.5 for a, b, c in zip(pred0, pred1, pred2)]
+create_training_set_goalnogoal.res = None
+

@@ -34,9 +34,9 @@ if __name__ == "__main__":
     res = []
     if args.serie == "all":
         for s in series_list:
-            res.append((s, utils.test(serie=s, C1=C, gamma=gamma)))
+            res.append((s, utils.testgoalnogoal(serie=s, C1=C, gamma=gamma)))
     else:
-        res.append((serie, utils.test(serie=serie, C1=C, gamma=gamma)))
+        res.append((serie, utils.testgoalnogoal(serie=serie, C1=C, gamma=gamma)))
     for result in res:
         print (result[0], numpy.mean(result[1]), len(result[1]))
     print (numpy.mean([numpy.mean(prob[1]) for prob in res]))

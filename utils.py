@@ -241,8 +241,6 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     print(predicted_prob)
     temp_res = []
     for x in range(len(y1)):
-        flag1 = numpy.absolute(predicted_prob[x][predicted[x]] - predicted_prob[x][(predicted[x] + 1) % 3])
-        flag2 = numpy.absolute(predicted_prob[x][predicted[x]] - predicted_prob[x][(predicted[x] + 2) % 3])
         #
         # if predicted[x] == 1:
         #     if max_threshold > predicted_prob[x][1] >= threshold:
@@ -267,6 +265,7 @@ def fit(X, y, X1, y1, C1=2, gamma=0.2):
     print(numpy.mean(temp_res))
     score = clf.score(X1, y1)
     return temp_res
+
 
 fit.list_of_0 = []
 fit.list_of_1 = []

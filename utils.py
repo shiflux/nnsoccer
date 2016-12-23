@@ -191,10 +191,10 @@ def create_season_training_set_goalnogoal(serie="serie-a", season="16-17"):
                 break
             split_ly = ly.split("-", 1)
 
-            if int(split_ly[0]) > 0 and int(split_ly[1] > 0):
-                ly = 1
-            else:
+            if int(split_ly[0]) == 0 or int(split_ly[1] == 0):
                 ly = 0
+            else:
+                ly = 1
 
             x.append(lx)
             y.append(ly)

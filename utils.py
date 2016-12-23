@@ -334,6 +334,12 @@ def predict_test(next_games_list, serie="serie-a", C1=1, gamma=0.1):
     return predict(x0, y0, xp, C1=C1, gamma=gamma)
 
 
+def predict_test_goalnogoal(next_games_list, serie="serie-a", C1=1, gamma=0.1):
+    x0, y0 = create_training_set_goalnogoal()
+    xp = create_predict_set2(next_games_list, serie=serie, season="16-17")
+    return predict(x0, y0, xp, C1=C1, gamma=gamma)
+
+
 def create_training_set():
     if create_training_set.res is None:
         x0, y0 = create_season_training_set2(serie="serie-a", season="15-16")

@@ -13,8 +13,8 @@ class SoccerPredictor:
         self.list_of_0 = []
         self.list_of_1 = []
         self.list_of_2 = []
-        self.threshold=0
-        self.max_threshold=2
+        self.threshold = 0
+        self.max_threshold = 2
 
     def createTrainingSet(self):
         self.training_set = self.createSeasonTrainingSet(serie="serie-a", season="15-16")

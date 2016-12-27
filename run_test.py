@@ -40,9 +40,9 @@ if __name__ == "__main__":
     if args.serie == "all":
         for s in series_list:
             res.append((s, myPredictor.test(serie=s)))
-            list_of_0 += myPredictor.list_of_0
-            list_of_1 = myPredictor.list_of_1
-            list_of_2 = myPredictor.list_of_2
+            list_of_0.extend( myPredictor.list_of_0)
+            list_of_1.extend(myPredictor.list_of_1)
+            list_of_2.extend(myPredictor.list_of_2)
     else:
         res.append((serie, myPredictor.test(serie=serie)))
     for result in res:

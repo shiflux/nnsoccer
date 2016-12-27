@@ -18,7 +18,7 @@ class SoccerPredictor:
 
     def createTrainingSet(self):
         self.training_set = self.createSeasonTrainingSet(serie="serie-a", season="15-16")
-        #self.training_set += create_season_training_set2(serie="serie-a", season="14-15")
+        self.training_set += self.createSeasonTrainingSet(serie="serie-a", season="14-15")
         self.training_set += self.createSeasonTrainingSet(serie="serie-b", season="15-16")
         self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
         self.clf.fit(self.training_set[0], self.training_set[1])

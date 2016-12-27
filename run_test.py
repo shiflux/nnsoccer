@@ -1,4 +1,4 @@
-import utils
+from nnsoccer import SoccerPredictor
 import argparse
 import numpy
 
@@ -13,6 +13,7 @@ if __name__ == "__main__":
     parser.add_argument('-gamma', type=float, required=False, help='Gamma parameter')
     parser.add_argument('-threshold', type=float, required=False, help='Threshold')
     parser.add_argument('-maxthreshold', type=float, required=False, help='Max Threshold')
+    myPredictor = SoccerPredictor()
     args = parser.parse_args()
     if args.gamma is None:
         gamma = 0.01
@@ -27,20 +28,27 @@ if __name__ == "__main__":
     else:
         serie = args.serie
     if args.threshold is not None:
-        utils.threshold = args.threshold
+        myPredictor.threshold = args.threshold
     if args.maxthreshold is not None:
-        utils.max_threshold = args.maxthreshold
+        myPredictor.max_threshold = args.maxthreshold
 
     res = []
+    list_of_0 = []
+    list_of_1 = []
+    list_of_2 = []
+    myPredictor.createTrainingSet()
     if args.serie == "all":
         for s in series_list:
-            res.append((s, utils.test(serie=s, C1=C, gamma=gamma)))
+            res.append((s, myPredictor.test(serie=s)))
+            list_of_0 += myPredictor.list_of_0
+            list_of_1 = myPredictor.list_of_1
+            list_of_2 = myPredictor.list_of_2
     else:
-        res.append((serie, utils.test(serie=serie, C1=C, gamma=gamma)))
+        res.append((serie, myPredictor.test(serie=serie)))
     for result in res:
         print (result[0], numpy.mean(result[1]), len(result[1]))
     print (numpy.mean([numpy.mean(prob[1]) for prob in res]))
 
-    print ("Number of 0: " + str(len(utils.fit.list_of_0)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_0)))
-    print ("Number of 1: " + str(len(utils.fit.list_of_1)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_1)))
-    print ("Number of 2: " + str(len(utils.fit.list_of_2)) + " - accuracy: " + str(numpy.mean(utils.fit.list_of_2)))
+    print ("Number of 0: " + str(len(list_of_0)) + " - accuracy: " + str(numpy.mean(list_of_0)))
+    print ("Number of 1: " + str(len(list_of_1)) + " - accuracy: " + str(numpy.mean(list_of_1)))
+    print ("Number of 2: " + str(len(list_of_2)) + " - accuracy: " + str(numpy.mean(list_of_2)))

@@ -58,4 +58,5 @@ if __name__ == "__main__":
 
     print ("Number of 0: " + str(len(list_of_0)) + " - accuracy: " + str(numpy.mean(list_of_0)))
     print ("Number of 1: " + str(len(list_of_1)) + " - accuracy: " + str(numpy.mean(list_of_1)))
-    print ("Number of 2: " + str(len(list_of_2)) + " - accuracy: " + str(numpy.mean(list_of_2)))
+    if not args.type == "golnogol":
+        print ("Number of 2: " + str(len(list_of_2)) + " - accuracy: " + str(numpy.mean(list_of_2)))

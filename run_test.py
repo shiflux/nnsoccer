@@ -43,12 +43,12 @@ if __name__ == "__main__":
         myPredictor.createTrainingSet()
     if args.serie == "all":
         for s in series_list:
-            res.append((s, myPredictor.test(serie=s)))
+            res.append((s, myPredictor.test(serie=s, trainingType=args.type)))
             list_of_0.extend(myPredictor.list_of_0)
             list_of_1.extend(myPredictor.list_of_1)
             list_of_2.extend(myPredictor.list_of_2)
     else:
-        res.append((serie, myPredictor.test(serie=serie)))
+        res.append((serie, myPredictor.test(serie=serie, trainingType=args.type)))
         list_of_0.extend(myPredictor.list_of_0)
         list_of_1.extend(myPredictor.list_of_1)
         list_of_2.extend(myPredictor.list_of_2)

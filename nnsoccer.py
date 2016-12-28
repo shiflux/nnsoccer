@@ -8,7 +8,6 @@ sys.setdefaultencoding('utf-8')
 
 class SoccerPredictor:
     def __init__(self):
-        self.training_set = None
         self.clf = None
         self.list_of_0 = []
         self.list_of_1 = []
@@ -137,12 +136,12 @@ class SoccerPredictor:
             x[gl] = f
         return x
 
-    def test(self, serie):
+    def test(self, serie, trainingType=None):
         if self.clf is None:
             print ("Error, no clf created")
             return
 
-        X1, Y1 = self.createSeasonTrainingSet(serie, season=settings.current_season)
+        X1, Y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
         predicted_prob = (self.clf.predict_proba(X1))
         predicted = (self.clf.predict(X1))
         temp_res = []

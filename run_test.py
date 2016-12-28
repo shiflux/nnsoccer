@@ -13,6 +13,7 @@ if __name__ == "__main__":
     parser.add_argument('-gamma', type=float, required=False, help='Gamma parameter')
     parser.add_argument('-threshold', type=float, required=False, help='Threshold')
     parser.add_argument('-maxthreshold', type=float, required=False, help='Max Threshold')
+    parser.add_argument('-type', type=str, required=False, help='golnogol')
     myPredictor = SoccerPredictor()
     args = parser.parse_args()
     if args.gamma is None:
@@ -36,7 +37,10 @@ if __name__ == "__main__":
     list_of_0 = []
     list_of_1 = []
     list_of_2 = []
-    myPredictor.createTrainingSet()
+    if args.type == "golnogol":
+        myPredictor.createTrainingSet(type="golnogol")
+    else:
+        myPredictor.createTrainingSet()
     if args.serie == "all":
         for s in series_list:
             res.append((s, myPredictor.test(serie=s)))

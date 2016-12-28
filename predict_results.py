@@ -15,6 +15,8 @@ if __name__ == "__main__":
     parser.add_argument('-v', type=bool, required=False, help='Verbose')
     parser.add_argument('-C', type=str, required=False, help='C parameter')
     parser.add_argument('-gamma', type=str, required=False, help='Gamma parameter')
+    parser.add_argument('-type', type=str, required=False, help='golnogol')
+
     args = parser.parse_args()
     myPredictor = SoccerPredictor()
     if args.filename is not None and args.serie is not None:
@@ -38,7 +40,10 @@ if __name__ == "__main__":
                 C = args.C
 
             if len(my_game_list) > 0:
-                myPredictor.createTrainingSet()
+                if args.type == "golnogol":
+                    myPredictor.createTrainingSet(type="golnogol")
+                else:
+                    myPredictor.createTrainingSet()
                 result = myPredictor.predictGames(my_game_list, serie=args.serie)
                 for game in result:
                     print(game, result[game])

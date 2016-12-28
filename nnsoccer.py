@@ -113,10 +113,11 @@ class SoccerPredictor:
             print ("Error, no clf created")
             return
         predict_set = self.createPredictSet(games_list, serie=serie, season=settings.current_season)
-        print predict_set
 
         results = {}
         for key, values in predict_set:
+            print key
+            print values
             results[key] = self.clf.predict(values)
         return results
 

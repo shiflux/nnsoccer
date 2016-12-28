@@ -44,7 +44,7 @@ if __name__ == "__main__":
                     myPredictor.createTrainingSet(trainingType="golnogol")
                 else:
                     myPredictor.createTrainingSet()
-                result = myPredictor.predictGames(my_game_list, serie=args.serie, trainingType="golnogol")
+                result = myPredictor.predictGames(my_game_list, serie=args.serie)
                 for game in result:
                     print(game, result[game])
             else:

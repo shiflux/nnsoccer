@@ -117,6 +117,7 @@ class SoccerPredictor:
         results = {}
         for key in predict_set:
             print key
+            print predict_set[key]
             results[key] = self.clf.predict(predict_set[key])
         return results
 

@@ -40,8 +40,7 @@ if __name__ == "__main__":
             if len(my_game_list) > 0:
                 myPredictor.createTrainingSet()
                 result = myPredictor.predictGames(my_game_list, serie=args.serie)
-                for game, r in result:
-                    print(game, result)
+                print result
             else:
                 print ("Error not enough games")
 

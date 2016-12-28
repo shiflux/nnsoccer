@@ -40,11 +40,14 @@ if __name__ == "__main__":
     if args.serie == "all":
         for s in series_list:
             res.append((s, myPredictor.test(serie=s)))
-            list_of_0.extend( myPredictor.list_of_0)
+            list_of_0.extend(myPredictor.list_of_0)
             list_of_1.extend(myPredictor.list_of_1)
             list_of_2.extend(myPredictor.list_of_2)
     else:
         res.append((serie, myPredictor.test(serie=serie)))
+        list_of_0.extend(myPredictor.list_of_0)
+        list_of_1.extend(myPredictor.list_of_1)
+        list_of_2.extend(myPredictor.list_of_2)
     for result in res:
         print (result[0], numpy.mean(result[1]), len(result[1]))
     print (numpy.mean([numpy.mean(prob[1]) for prob in res]))

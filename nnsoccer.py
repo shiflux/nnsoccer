@@ -115,10 +115,9 @@ class SoccerPredictor:
         predict_set = self.createPredictSet(games_list, serie=serie, season=settings.current_season)
 
         results = {}
-        for key, values in predict_set:
+        for key in predict_set:
             print key
-            print values
-            results[key] = self.clf.predict(values)
+            results[key] = self.clf.predict(predict_set[key])
         return results
 
     def createPredictSet(self, games_list, serie, season):

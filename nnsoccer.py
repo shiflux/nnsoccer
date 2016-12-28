@@ -149,7 +149,6 @@ class SoccerPredictor:
                     self.list_of_0.append(temp_res[-1])
                 elif predicted[x] == 1:
                     self.list_of_1.append(temp_res[-1])
-                    print "hello"
                 else:
                     self.list_of_2.append(temp_res[-1])
         return temp_res

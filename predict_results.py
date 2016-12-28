@@ -1,4 +1,4 @@
-import utils
+from nnsoccer import SoccerPredictor
 import argparse
 import sys
 reload(sys)
@@ -16,6 +16,7 @@ if __name__ == "__main__":
     parser.add_argument('-C', type=str, required=False, help='C parameter')
     parser.add_argument('-gamma', type=str, required=False, help='Gamma parameter')
     args = parser.parse_args()
+    myPredictor = SoccerPredictor()
     if args.filename is not None and args.serie is not None:
         my_game_list = []
         with open(args.filename) as myFile:
@@ -37,7 +38,10 @@ if __name__ == "__main__":
                 C = args.C
 
             if len(my_game_list) > 0:
-                print (utils.predict_test(my_game_list, serie=args.serie, C1= 3, gamma=0.01))
+                myPredictor.createTrainingSet()
+                result = myPredictor.predictGames(my_game_list, serie=args.serie)
+                for game, r in result:
+                    print(game, result)
             else:
                 print ("Error not enough games")
 

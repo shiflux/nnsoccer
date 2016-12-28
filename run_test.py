@@ -38,7 +38,7 @@ if __name__ == "__main__":
     list_of_1 = []
     list_of_2 = []
     if args.type == "golnogol":
-        myPredictor.createTrainingSet(type="golnogol")
+        myPredictor.createTrainingSet(trainingType="golnogol")
     else:
         myPredictor.createTrainingSet()
     if args.serie == "all":

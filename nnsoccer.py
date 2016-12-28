@@ -17,11 +17,15 @@ class SoccerPredictor:
         self.max_threshold = 2
 
     def createTrainingSet(self, trainingType=None):
-        self.training_set = self.createSeasonTrainingSet(serie="serie-a", season="15-16", trainingType=trainingType)
-        self.training_set += self.createSeasonTrainingSet(serie="serie-a", season="14-15", trainingType=trainingType)
-        self.training_set += self.createSeasonTrainingSet(serie="serie-b", season="15-16", trainingType=trainingType)
+        x0, y0 = self.createSeasonTrainingSet(serie="serie-a", season="15-16", trainingType=trainingType)
+        x1, y1 = self.createSeasonTrainingSet(serie="serie-a", season="14-15", trainingType=trainingType)
+        x0 += x1
+        y0 += y1
+        x1, y1 = self.createSeasonTrainingSet(serie="serie-b", season="15-16", trainingType=trainingType)
+        x0 += x1
+        y0 += y1
         self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
-        self.clf.fit(self.training_set[0], self.training_set[1])
+        self.clf.fit(x0, y0)
 
 
     def createSeasonTrainingSet(self, serie, season, trainingType=None):

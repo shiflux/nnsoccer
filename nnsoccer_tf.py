@@ -160,4 +160,22 @@ class SoccerPredictorTF:
                     self.list_of_2.append(temp_res[-1])
         return temp_res
 
+    def predictGames(self, games_list, serie):
+        predict_set = self.createPredictSet(games_list, serie=serie, season=settings.current_season)
+
+        results = {}
+        new_list = []
+        temp_games = []
+        for key in predict_set:
+            new_list.append(predict_set[key])
+            temp_games.append(key)
+        res_svm = self.clf.predict_proba(new_list)
+        res = list(self.classifier.predict_proba(np.array(new_list), as_iterable=True))
+        for x in range(len(temp_games)):
+            temp = []
+            for y in range(len(res[x])):
+                temp.append(res[x][y] + res_svm[x][y])
+            results[temp_games[x]] = temp
+        return results
+
 

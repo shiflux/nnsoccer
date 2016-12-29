@@ -38,7 +38,7 @@ class SoccerPredictorTF:
             for match in temp_data:
                 homet = match[0]
                 awayt = match[1]
-                if not (features.has_key(homet) and features.has_key(awayt)):
+                if not (homet in features and awayt in features):
                     continue
                 lx = features[homet] + features[awayt]
                 ly = temp_data[match]

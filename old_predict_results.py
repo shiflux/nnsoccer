@@ -1,6 +1,8 @@
-from nnsoccer_tf import SoccerPredictorTF
+from nnsoccer import SoccerPredictor
 import argparse
 import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 #todo
 ############http://soccer.sportsopendata.net/v1/leagues/serie-a/seasons/16-17/rounds/round-16/matches
@@ -16,7 +18,7 @@ if __name__ == "__main__":
     parser.add_argument('-type', type=str, required=False, help='golnogol')
 
     args = parser.parse_args()
-    myPredictor = SoccerPredictorTF()
+    myPredictor = SoccerPredictor()
     if args.filename is not None and args.serie is not None:
         my_game_list = []
         with open(args.filename) as myFile:
@@ -25,7 +27,7 @@ if __name__ == "__main__":
             for line in stocks:
                 game = line.decode('utf-8').split(';')
                 if args.v:
-                    print (game)
+                    print game
                 if len(game) == 2:
                     my_game_list.append((game[0].strip(), game[1].strip()))
             if args.gamma is None:

@@ -125,41 +125,6 @@ class SoccerPredictorTF:
             x[gl] = f
         return x
 
-    # def test(self, serie, trainingType=None):
-    #
-    #     X1, Y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
-    #     accuracy_score = self.classifier.evaluate(x=np.array(X1), y=np.array(Y1))["accuracy"]
-    #     print('Accuracy: {0:f}'.format(accuracy_score))
-    #
-    #     predicted = list(self.classifier.predict(np.array(X1), as_iterable=True))
-    #     predicted_prob = list(self.classifier.predict_proba(np.array(X1), as_iterable=True))
-    #
-    #     predicted_prob_svm = (self.clf.predict_proba(X1))
-    #     predicted_svm = (self.clf.predict(X1))
-    #
-    #     temp_res = []
-    #     self.list_of_0 = []
-    #     self.list_of_1 = []
-    #     self.list_of_2 = []
-    #     for x in range(len(Y1)):
-    #         probs = list()
-    #         for p in range(2 if trainingType == "golnogol" else 3):
-    #             probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
-    #         max_prob = max(probs)
-    #         max_index = probs.index(max_prob)
-    #         if self.max_threshold > max_prob >= self.threshold:
-    #             if max_index == Y1[x]:
-    #                 temp_res.append(1)
-    #             else:
-    #                 temp_res.append(0)
-    #             if max_index == 0:
-    #                 self.list_of_0.append(temp_res[-1])
-    #             elif max_index == 1:
-    #                 self.list_of_1.append(temp_res[-1])
-    #             else:
-    #                 self.list_of_2.append(temp_res[-1])
-    #     return temp_res
-
     def test(self, serie, trainingType=None):
 
         X1, Y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
@@ -182,7 +147,7 @@ class SoccerPredictorTF:
                 probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
             max_prob = max(probs)
             max_index = probs.index(max_prob)
-            if predicted_prob[x][predicted[x]] >= self.threshold and predicted_prob_svm[x][predicted[x]] >= self.threshold and predicted_prob[x][predicted[x]] == predicted_prob_svm[x][predicted[x]]:
+            if self.max_threshold > max_prob >= self.threshold:
                 if max_index == Y1[x]:
                     temp_res.append(1)
                 else:
@@ -194,4 +159,5 @@ class SoccerPredictorTF:
                 else:
                     self.list_of_2.append(temp_res[-1])
         return temp_res
+
 

@@ -24,25 +24,15 @@ class SoccerPredictorTF:
         x0 += x1
         y0 += y1
         feature_columns = [tf.contrib.layers.real_valued_column("", dimension=len(settings.my_global_features))]
-        # self.classifier = tf.contrib.learn.DNNRegressor(feature_columns=feature_columns,
-        #                                                 hidden_units=[1024, 512, 256],
-        #                                                 optimizer=tf.train.ProximalAdagradOptimizer(
-        #                                                     learning_rate=0.1,
-        #                                                     l1_regularization_strength=0.001
-        #                                                 ))
-        #
-        # self.classifier.fit(x = np.array(x0), y = np.array(y0), steps=2000)
-        self.classifier = tf.contrib.learn.DNNRegressor(
-            feature_columns=feature_columns,
-            hidden_units=[1024, 512, 256],
-            optimizer=tf.train.ProximalAdagradOptimizer(
-                learning_rate=0.1,
-                l1_regularization_strength=0.001
-            )
-        )
-        print("Starting fit")
-        self.classifier.fit(x = np.array(x0), y = np.array(y0))
-        print("Fit ended")
+        self.classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
+                                                        hidden_units=[1024, 512, 256],
+                                                        optimizer=tf.train.ProximalAdagradOptimizer(
+                                                            learning_rate=0.1,
+                                                            l1_regularization_strength=0.001
+                                                        ))
+
+        self.classifier.fit(x = np.array(x0), y = np.array(y0), steps=2000)
+
 
 
 

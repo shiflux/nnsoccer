@@ -40,7 +40,9 @@ class SoccerPredictorTF:
                 l1_regularization_strength=0.001
             )
         )
+        print("Starting fit")
         self.classifier.fit(x = np.array(x0), y = np.array(y0))
+        print("Fit ended")
 
 
 

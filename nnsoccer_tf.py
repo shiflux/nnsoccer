@@ -66,7 +66,7 @@ class SoccerPredictorTF:
     def getFeatures(self, serie, season, my_features=settings.my_global_features):
         temp_dict = {}
         response = urllib.request.urlopen(settings.api_link + "leagues/" + serie + "/seasons/" + season + "/standings")
-        r = json.loads(r.read().decode(response.info().get_param('charset') or 'utf-8'))
+        r = json.loads(response.read().decode(response.info().get_param('charset') or 'utf-8'))
         for st in r['data']['standings']:
             f_list = []
             matches_played = st["overall"]["wins"] + st["overall"]["draws"] + st["overall"]["losts"]
@@ -77,7 +77,7 @@ class SoccerPredictorTF:
 
     def getSeasonRounds(self, serie, season):
         response = urllib.request.urlopen(settings.api_link + "leagues/" + serie + "/seasons/" + season + "/rounds")
-        r = json.loads(r.read().decode(response.info().get_param('charset') or 'utf-8'))
+        r = json.loads(response.read().decode(response.info().get_param('charset') or 'utf-8'))
         rounds = r['data']['rounds']
         temp_list = []
         for r in rounds:
@@ -86,7 +86,7 @@ class SoccerPredictorTF:
 
     def getDetailedRoundData(self, round, serie, season):
         response = urllib.request.urlopen(settings.api_link + "leagues/" + serie + "/seasons/" + season + "/rounds/" + round)
-        r = json.loads(r.read().decode(response.info().get_param('charset') or 'utf-8'))
+        r = json.loads(response.read().decode(response.info().get_param('charset') or 'utf-8'))
         if r['data']['rounds'] == []:
             return []
         matches = r['data']['rounds'][0]['matches']

@@ -147,7 +147,7 @@ class SoccerPredictorTF:
                 probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
             max_prob = max(probs)
             max_index = probs.index(max_prob)
-            if predicted_prob[x][predicted[x]] >= self.threshold and predicted_prob_svm[x][predicted[x]] >= self.threshold and predicted_prob[x][predicted[x]] == predicted_prob_svm[x][predicted[x]]:
+            if self.max_threshold > max_prob >= self.threshold:
                 if max_index == Y1[x]:
                     temp_res.append(1)
                 else:
@@ -182,7 +182,7 @@ class SoccerPredictorTF:
     #             probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
     #         max_prob = max(probs)
     #         max_index = probs.index(max_prob)
-    #         if self.max_threshold > max_prob >= self.threshold:
+    #         if predicted_prob[x][predicted[x]] >= self.threshold and predicted_prob_svm[x][predicted[x]] >= self.threshold and predicted_prob[x][predicted[x]] == predicted_prob_svm[x][predicted[x]]:
     #             if max_index == Y1[x]:
     #                 temp_res.append(1)
     #             else:

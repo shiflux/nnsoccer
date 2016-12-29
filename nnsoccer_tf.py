@@ -145,7 +145,6 @@ class SoccerPredictorTF:
             probs = list()
             for p in range(2 if trainingType == "golnogol" else 3):
                 probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
-            print(probs)
             max_prob = max(probs)
             max_index = probs.index(max_prob)
             if self.max_threshold > max_prob >= self.threshold:

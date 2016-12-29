@@ -1,12 +1,8 @@
 import urllib.request
 import settings
-import importlib
 import tensorflow as tf
-import sys
 import numpy as np
 
-importlib.reload(sys)
-sys.setdefaultencoding('utf-8')
 
 
 class SoccerPredictorTF:

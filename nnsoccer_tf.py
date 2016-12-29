@@ -23,7 +23,9 @@ class SoccerPredictorTF:
         x1, y1 = self.createSeasonTrainingSet(serie="serie-b", season="15-16", trainingType=trainingType)
         x0 += x1
         y0 += y1
-        self.classifier = tf.contrib.learn.DNNClassifier(hidden_units=[10, 20, 10],
+        feature_columns = [tf.contrib.layers.real_valued_column("", dimension=len(settings.my_global_features))]
+        self.classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
+                                                        hidden_units=[10, 20, 10],
                                                          n_classes=2 if trainingType == "golnogol" else 3)
 
         self.classifier.fit(x = np.array(x0), y = np.array(y0), steps=2000)

@@ -143,7 +143,8 @@ class SoccerPredictorTF:
         self.list_of_2 = []
         for x in range(len(Y1)):
             probs = list()
-            probs.append((predicted_prob[p] + predicted_prob_svm[p])/2 for p in range(2 if trainingType == "golnogol" else 3))
+            for p in range(2 if trainingType == "golnogol" else 3):
+                probs.append((predicted_prob[p] + predicted_prob_svm[p]) / 2)
             print(probs)
             max_prob = max(probs)
             max_index = probs.index(max_prob)

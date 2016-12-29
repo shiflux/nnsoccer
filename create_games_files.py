@@ -1,21 +1,13 @@
 import argparse
-import unirest
 import settings
 import os
 import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
+import urllib.request
+import json
 
 def read_games(round, serie="serie-a", season="16-17"):
-    response = unirest.get("http://soccer.sportsopendata.net/v1/leagues/" + serie + "/seasons/" + season + "/rounds/"
-                           + round + "/matches",
-                           headers={
-                               "X-Mashape-Key": settings.mashape_key,
-                               "Accept": "application/json"
-                           }
-                           )
-    r = response.body
+    response = urllib.request.urlopen(settings.api_link + "leagues/" + serie + "/seasons/" + season + "/rounds/"+ round + "/matches")
+    r = json.loads(response.read().decode(response.info().get_param('charset') or 'utf-8'))
     g_list = []
     for match in r['data']['matches']:
         g_list.append((match['home']['team'], match['away']['team']))
@@ -38,14 +30,8 @@ if __name__ == "__main__":
     else:
         season = args.season
 
-    response = unirest.get("http://soccer.sportsopendata.net/v1/leagues/" + args.serie + "/seasons/" + season +
-                           "/rounds",
-                           headers={
-                               "X-Mashape-Key": settings.mashape_key,
-                               "Accept": "application/json"
-                           }
-                           )
-    r = response.body
+    response = urllib.request.urlopen(settings.api_link + "leagues/" + args.serie + "/seasons/" + season + "/rounds")
+    r = json.loads(response.read().decode(response.info().get_param('charset') or 'utf-8'))
     round = r['data']['rounds'][args.round-1]['round_slug']
     games = read_games(round, args.serie, season)
 

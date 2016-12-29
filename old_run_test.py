@@ -1,4 +1,4 @@
-from nnsoccer_tf import SoccerPredictorTF
+from nnsoccer import SoccerPredictor
 import argparse
 import numpy
 
@@ -14,7 +14,7 @@ if __name__ == "__main__":
     parser.add_argument('-threshold', type=float, required=False, help='Threshold')
     parser.add_argument('-maxthreshold', type=float, required=False, help='Max Threshold')
     parser.add_argument('-type', type=str, required=False, help='golnogol')
-    myPredictor = SoccerPredictorTF()
+    myPredictor = SoccerPredictor()
     args = parser.parse_args()
     if args.gamma is None:
         gamma = 0.01

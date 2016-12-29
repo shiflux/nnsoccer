@@ -3,6 +3,7 @@ import settings
 import tensorflow as tf
 import numpy as np
 import json
+from sklearn import svm
 
 
 
@@ -29,6 +30,8 @@ class SoccerPredictorTF:
                                                          n_classes=2 if trainingType == "golnogol" else 3)
 
         self.classifier.fit(x = np.array(x0), y = np.array(y0), steps=2000)
+        self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
+        self.clf.fit(x0, y0)
 
 
     def createSeasonTrainingSet(self, serie, season, trainingType=None):
@@ -130,19 +133,27 @@ class SoccerPredictorTF:
 
         predicted = list(self.classifier.predict(np.array(X1), as_iterable=True))
         predicted_prob = list(self.classifier.predict_proba(np.array(X1), as_iterable=True))
+
+        predicted_prob_svm = (self.clf.predict_proba(X1))
+        predicted_svm = (self.clf.predict(X1))
+
         temp_res = []
         self.list_of_0 = []
         self.list_of_1 = []
         self.list_of_2 = []
         for x in range(len(Y1)):
-            if self.max_threshold > predicted_prob[x][predicted[x]] >= self.threshold:
-                if predicted[x] == Y1[x]:
+            probs = list
+            probs.append(predicted_prob[p] + predicted_prob_svm[p] for p in range(2 if trainingType == "golnogol" else 3))
+            max_prob = max(probs)
+            max_index = probs.index(max_prob)
+            if self.max_threshold > max_prob >= self.threshold:
+                if max_index == Y1[x]:
                     temp_res.append(1)
                 else:
                     temp_res.append(0)
-                if predicted[x] == 0:
+                if max_index == 0:
                     self.list_of_0.append(temp_res[-1])
-                elif predicted[x] == 1:
+                elif max_index == 1:
                     self.list_of_1.append(temp_res[-1])
                 else:
                     self.list_of_2.append(temp_res[-1])

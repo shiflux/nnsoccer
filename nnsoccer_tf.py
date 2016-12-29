@@ -123,9 +123,6 @@ class SoccerPredictorTF:
         return x
 
     def test(self, serie, trainingType=None):
-        if self.clf is None:
-            print ("Error, no clf created")
-            return
 
         X1, Y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
         accuracy_score = self.classifier.evaluate(x=np.array(X1), y=np.array(Y1))["accuracy"]

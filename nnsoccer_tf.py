@@ -32,7 +32,7 @@ class SoccerPredictorTF:
         #                                                 ))
         #
         # self.classifier.fit(x = np.array(x0), y = np.array(y0), steps=2000)
-        self.classifier = tf.DNNRegressor(
+        self.classifier = tf.contrib.learn.DNNRegressor(
             feature_columns=feature_columns,
             hidden_units=[1024, 512, 256],
             optimizer=tf.train.ProximalAdagradOptimizer(

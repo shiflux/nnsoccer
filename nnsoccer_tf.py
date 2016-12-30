@@ -180,7 +180,7 @@ class SoccerPredictorTF:
         return results
 
     def saveLog(self, to_write):
-        with open("/log/"+str(datetime.now())+".txt", 'w+') as myFile:
+        with open("log/"+str(datetime.now())+".txt", 'w+') as myFile:
             myFile.write(to_write)
             print("Wrote log to file " + myFile.name)
 

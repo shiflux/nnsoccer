@@ -4,6 +4,7 @@ import tensorflow as tf
 import numpy as np
 import json
 from sklearn import svm
+from datetime import datetime
 
 
 
@@ -178,4 +179,8 @@ class SoccerPredictorTF:
             results[temp_games[x]] = temp
         return results
 
+    def saveLog(self, to_write):
+        with open("/log/"+str(datetime.now())+".txt", 'w+') as myFile:
+            myFile.write(to_write)
+            print("Wrote log to file " + myFile.name)
 

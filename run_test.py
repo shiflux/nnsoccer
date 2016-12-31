@@ -43,7 +43,7 @@ if __name__ == "__main__":
         myPredictor.createTrainingSet(trainingType="golnogol")
     else:
         myPredictor.createTrainingSet()
-    if args.serie == "all":
+    if serie == "all":
         for s in series_list:
             res.append((s, myPredictor.test(serie=s, trainingType=args.type)))
             list_of_0.extend(myPredictor.list_of_0)

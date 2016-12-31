@@ -26,7 +26,7 @@ if __name__ == "__main__":
     else:
         C = args.C
     if args.serie is None:
-        serie = "serie-a"
+        serie = "all"
     else:
         serie = args.serie
     if args.threshold is not None:

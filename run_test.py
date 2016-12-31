@@ -14,6 +14,7 @@ if __name__ == "__main__":
     parser.add_argument('-threshold', type=float, required=False, help='Threshold')
     parser.add_argument('-maxthreshold', type=float, required=False, help='Max Threshold')
     parser.add_argument('-type', type=str, required=False, help='golnogol')
+    parser.add_argument('-log', type=bool, required=False, help='Log true false')
     myPredictor = SoccerPredictorTF()
     args = parser.parse_args()
     if args.gamma is None:
@@ -66,5 +67,5 @@ if __name__ == "__main__":
     if not args.type == "golnogol":
         print ("Number of 2: " + str(len(list_of_2)) + " - accuracy: " + str(numpy.mean(list_of_2)))
         for_log.append("Number of 2: " + str(len(list_of_2)) + " - accuracy: " + str(numpy.mean(list_of_2)))
-    if len(for_log) > 0:
+    if args.log and len(for_log) > 0:
         myPredictor.saveLog(for_log)

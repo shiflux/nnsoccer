@@ -55,9 +55,9 @@ if __name__ == "__main__":
         list_of_2.extend(myPredictor.list_of_2)
     for result in res:
         print(result[0], numpy.mean(result[1]), len(result[1]))
-        for_log.append((result[0], numpy.mean(result[1]), len(result[1])))
+        for_log.append(str(result[0]) + " " +  str(numpy.mean(result[1])) + " " + str(len(result[1])))
     print (numpy.mean([numpy.mean(prob[1]) for prob in res]))
-    for_log.append((numpy.mean([numpy.mean(prob[1]) for prob in res])))
+    for_log.append(str(numpy.mean([numpy.mean(prob[1]) for prob in res])))
 
     print ("Number of 0: " + str(len(list_of_0)) + " - accuracy: " + str(numpy.mean(list_of_0)))
     for_log.append("Number of 0: " + str(len(list_of_0)) + " - accuracy: " + str(numpy.mean(list_of_0)))

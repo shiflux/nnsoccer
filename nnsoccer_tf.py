@@ -7,6 +7,7 @@ from sklearn import svm
 from datetime import datetime
 import os.path
 import pickle
+from collections import OrderedDict
 
 
 class SoccerPredictorTF:
@@ -87,7 +88,7 @@ class SoccerPredictorTF:
         return x, y
 
     def getFeatures(self, serie, season, my_features=settings.my_global_features):
-        temp_dict = {}
+        temp_dict = OrderedDict()
         response = urllib.request.urlopen(settings.api_link + "leagues/" + serie + "/seasons/" + season + "/standings")
         r = json.loads(response.read().decode(response.info().get_param('charset') or 'utf-8'))
         for st in r['data']['standings']:
@@ -113,7 +114,7 @@ class SoccerPredictorTF:
         if r['data']['rounds'] == []:
             return []
         matches = r['data']['rounds'][0]['matches']
-        temp_dict = {}
+        temp_dict = OrderedDict()
         for m in range(len(matches)):
             print(matches[m]['home_team'])
             temp_dict[(matches[m]['home_team'], matches[m]['away_team'])] = matches[m]['match_result']
@@ -125,7 +126,7 @@ class SoccerPredictorTF:
             return
         predict_set = self.createPredictSet(games_list, serie=serie, season=settings.current_season)
 
-        results = {}
+        results = OrderedDict()
         new_list = []
         temp_games = []
         for key in predict_set:
@@ -137,7 +138,7 @@ class SoccerPredictorTF:
         return results
 
     def createPredictSet(self, games_list, serie, season):
-        x = {}
+        x = OrderedDict()
         features = self.getFeatures(serie=serie, season=season)
         for gl in games_list:
             f = features[gl[0]] + features[gl[1]]
@@ -182,7 +183,7 @@ class SoccerPredictorTF:
     def predictGames(self, games_list, serie):
         predict_set = self.createPredictSet(games_list, serie=serie, season=settings.current_season)
 
-        results = {}
+        results = OrderedDict()
         new_list = []
         temp_games = []
         for key in predict_set:

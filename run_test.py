@@ -60,12 +60,12 @@ if __name__ == "__main__":
     print (numpy.mean([numpy.mean(prob[1]) for prob in res]))
     for_log.append(str(numpy.mean([numpy.mean(prob[1]) for prob in res])))
 
-    print ("Number of 0: " + str(len(list_of_0)) + " - accuracy: " + (str(numpy.mean(list_of_0)) if list_of_0 > 0 else "0"))
-    for_log.append("Number of 0: " + str(len(list_of_0)) + " - accuracy: " + (str(numpy.mean(list_of_0)) if list_of_0 > 0 else "0"))
-    print ("Number of 1: " + str(len(list_of_1)) + " - accuracy: " + (str(numpy.mean(list_of_1)) if list_of_1 > 0 else "0"))
-    for_log.append("Number of 1: " + str(len(list_of_1)) + " - accuracy: " + (str(numpy.mean(list_of_1)) if list_of_1 > 0 else "0"))
+    print ("Number of 0: " + str(len(list_of_0)) + " - accuracy: " + (str(numpy.mean(list_of_0)) if len(list_of_0) > 0 else "0"))
+    for_log.append("Number of 0: " + str(len(list_of_0)) + " - accuracy: " + (str(numpy.mean(list_of_0)) if len(list_of_0) > 0 else "0"))
+    print ("Number of 1: " + str(len(list_of_1)) + " - accuracy: " + (str(numpy.mean(list_of_1)) if len(list_of_1 > 0) else "0"))
+    for_log.append("Number of 1: " + str(len(list_of_1)) + " - accuracy: " + (str(numpy.mean(list_of_1)) if len(list_of_1 > 0) else "0"))
     if not args.type == "golnogol":
-        print ("Number of 2: " + str(len(list_of_2)) + " - accuracy: " + (str(numpy.mean(list_of_2)) if list_of_2 > 0 else "0"))
-        for_log.append("Number of 2: " + str(len(list_of_2)) + " - accuracy: " + (str(numpy.mean(list_of_2)) if list_of_2 > 0 else "0"))
+        print ("Number of 2: " + str(len(list_of_2)) + " - accuracy: " + (str(numpy.mean(list_of_2)) if len(list_of_2 > 0) else "0"))
+        for_log.append("Number of 2: " + str(len(list_of_2)) + " - accuracy: " + (str(numpy.mean(list_of_2)) if len(list_of_2 > 0) else "0"))
     if args.log and len(for_log) > 0:
         myPredictor.saveLog(for_log)

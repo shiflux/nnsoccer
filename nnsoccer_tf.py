@@ -14,7 +14,7 @@ class SoccerPredictorTF:
         self.list_of_1 = []
         self.list_of_2 = []
         self.threshold = 0
-        self.max_threshold = 2
+        self.max_threshold = 3
         self.tf_session = tf.InteractiveSession()
 
     def createTrainingSet(self, trainingType=None):
@@ -139,6 +139,8 @@ class SoccerPredictorTF:
         predicted_svm = (self.clf.predict(X1))
 
         temp_res = []
+        print(">>>>>>>>>>>>>", len(predicted_prob))
+        print(">>>>>>>>>>>>>", len(predicted_prob_svm))
         self.list_of_0 = []
         self.list_of_1 = []
         self.list_of_2 = []
@@ -146,9 +148,7 @@ class SoccerPredictorTF:
             probs = list()
             for p in range(2 if trainingType == "golnogol" else 3):
                 probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
-            print(">>>>>>>>>>>>>", len(probs))
             max_prob = max(probs)
-            print(">>>>>>>>>>>>>", len(max_prob))
             max_index = probs.index(max_prob)
             if self.max_threshold > max_prob >= self.threshold:
                 if max_index == Y1[x]:

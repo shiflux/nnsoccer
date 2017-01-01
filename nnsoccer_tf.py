@@ -116,7 +116,6 @@ class SoccerPredictorTF:
         matches = r['data']['rounds'][0]['matches']
         temp_dict = OrderedDict()
         for m in range(len(matches)):
-            print(matches[m]['home_team'])
             temp_dict[(matches[m]['home_team'], matches[m]['away_team'])] = matches[m]['match_result']
         return temp_dict
 

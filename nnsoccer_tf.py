@@ -153,6 +153,7 @@ class SoccerPredictorTF:
 
         predicted_prob_svm = (self.clf.predict_proba(x1))
         #predicted_svm = (self.clf.predict(X1))
+        print(x1)
 
         temp_res = []
         self.list_of_0 = []

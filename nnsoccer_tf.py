@@ -139,7 +139,18 @@ class SoccerPredictorTF:
         return x
 
     def test(self, serie, trainingType=None):
-
+        X1, Y1 = None
+        if os.path.exists("test_games_list.save"):
+            f = open("test_games_list.save", "rb")
+            X1 = pickle.load(f)
+            Y1 = pickle.load(f)
+            f.close()
+        else:
+            X1, Y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
+            f = open("test_games_list.save", "wb")
+            pickle.dump(X1, f, protocol=pickle.HIGHEST_PROTOCOL)
+            pickle.dump(Y1, f, protocol=pickle.HIGHEST_PROTOCOL)
+            f.close()
         X1, Y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
         accuracy_score = self.classifier.evaluate(x=np.array(X1), y=np.array(Y1))["accuracy"]
         print('Accuracy: {0:f}'.format(accuracy_score))

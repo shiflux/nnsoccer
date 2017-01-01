@@ -40,7 +40,7 @@ class SoccerPredictorTF:
         self.classifier.fit(x = np.array(x0), y = np.array(y0), steps=2000)
         self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
         self.clf.fit(x0, y0)
-        f = open("predictor.save")
+        f = open("predictor.save", "wb")
         pickle.dump(self.classifier, f, protocol=pickle.HIGHEST_PROTOCOL)
         pickle.dump(self.clf, f, protocol=pickle.HIGHEST_PROTOCOL)
         f.close()

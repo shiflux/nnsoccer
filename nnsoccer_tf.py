@@ -44,6 +44,7 @@ class SoccerPredictorTF:
         return x0, y0
 
     def createTrainingSet(self, trainingType=None):
+        self.my_input_fn()
         feature_columns = [tf.contrib.layers.real_valued_column("", dimension=len(settings.my_global_features))]
         self.classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
                                                         hidden_units=[len(settings.my_global_features)*2,len(settings.my_global_features)*4,len(settings.my_global_features)],

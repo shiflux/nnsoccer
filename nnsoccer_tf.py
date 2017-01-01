@@ -132,15 +132,13 @@ class SoccerPredictorTF:
         accuracy_score = self.classifier.evaluate(x=np.array(X1), y=np.array(Y1))["accuracy"]
         print('Accuracy: {0:f}'.format(accuracy_score))
 
-        predicted = list(self.classifier.predict(np.array(X1), as_iterable=True))
+        #predicted = list(self.classifier.predict(np.array(X1), as_iterable=True))
         predicted_prob = list(self.classifier.predict_proba(np.array(X1), as_iterable=True))
 
         predicted_prob_svm = (self.clf.predict_proba(X1))
-        predicted_svm = (self.clf.predict(X1))
+        #predicted_svm = (self.clf.predict(X1))
 
         temp_res = []
-        print(">>>>>>>>>>>>>", len(predicted_prob))
-        print(">>>>>>>>>>>>>", len(predicted_prob_svm))
         self.list_of_0 = []
         self.list_of_1 = []
         self.list_of_2 = []

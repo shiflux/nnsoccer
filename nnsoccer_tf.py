@@ -57,11 +57,11 @@ class SoccerPredictorTF:
         features = self.getFeatures(serie=serie, season=season)
         rounds = self.getSeasonRounds(serie, season)
         for r in rounds:
-            print(r)
             temp_data = self.getDetailedRoundData(r, serie, season)
             for match in temp_data:
                 homet = match[0]
                 awayt = match[1]
+                print(homet,awayt)
                 if not (homet in features and awayt in features):
                     continue
                 lx = features[homet] + features[awayt]

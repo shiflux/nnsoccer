@@ -8,7 +8,6 @@ from datetime import datetime
 import os.path
 import pickle
 from collections import OrderedDict
-from sklearn.neural_network import MLPClassifier
 
 
 class SoccerPredictorTF:
@@ -44,14 +43,12 @@ class SoccerPredictorTF:
         self.training_x = x0
         self.training_y = y0
         feature_columns = [tf.contrib.layers.real_valued_column("", dimension=len(settings.my_global_features))]
-        # self.classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
-        #                                                  hidden_units=[int(len(settings.my_global_features)/2)],
-        #                                                  n_classes=2 if trainingType == "golnogol" else 3)
+        self.classifier = tf.contrib.learn.DNNClassifier(model_dir="models",
+                                                            feature_columns=feature_columns,
+                                                         hidden_units=[int(len(settings.my_global_features)/2)],
+                                                         n_classes=2 if trainingType == "golnogol" else 3)
 
-        # self.classifier.fit(x=np.array(self.training_x).astype(np.float32), y=np.array(self.training_y).astype(np.int32), steps=settings.steps)
-        self.clf_nn = MLPClassifier(solver='lbfgs', alpha=1e-5,
-                     hidden_layer_sizes=(5, 2), random_state=1)
-        self.clf_nn.fit(self.training_x, self.training_y)
+        self.classifier.fit(x=np.array(self.training_x).astype(np.float32), y=np.array(self.training_y).astype(np.int32), steps=settings.steps)
         self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
         self.clf.fit(self.training_x, self.training_y)
 
@@ -150,12 +147,11 @@ class SoccerPredictorTF:
 
     def test(self, serie, trainingType=None):
         x1, y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
-        #accuracy_score = self.classifier.evaluate(x=np.array(x1).astype(np.float32), y=np.array(y1).astype(np.int32))["accuracy"]
-        #print('Accuracy: {0:f}'.format(accuracy_score))
+        accuracy_score = self.classifier.evaluate(x=np.array(x1).astype(np.float32), y=np.array(y1).astype(np.int32))["accuracy"]
+        print('Accuracy: {0:f}'.format(accuracy_score))
 
         #predicted = list(self.classifier.predict(np.array(X1), as_iterable=True))
-        #predicted_prob = list(self.classifier.predict_proba(np.array(x1).astype(np.float32), as_iterable=True))
-        predicted_prob = (self.clf_nn.predict_proba(x1))
+        predicted_prob = list(self.classifier.predict_proba(np.array(x1).astype(np.float32), as_iterable=True))
 
         predicted_prob_svm = (self.clf.predict_proba(x1))
         #predicted_svm = (self.clf.predict(X1))

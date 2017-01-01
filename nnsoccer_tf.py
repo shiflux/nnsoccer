@@ -18,7 +18,8 @@ class SoccerPredictorTF:
         self.max_threshold = 3
         self.tf_session = tf.InteractiveSession()
 
-    def createTrainingSet(self, trainingType=None):
+
+    def my_input_fn(self):
         if os.path.exists("training_games_list.save"):
             f = open("training_games_list.save", "rb")
             x0 = pickle.load(f)
@@ -36,12 +37,15 @@ class SoccerPredictorTF:
             pickle.dump(x0, f, protocol=pickle.HIGHEST_PROTOCOL)
             pickle.dump(y0, f, protocol=pickle.HIGHEST_PROTOCOL)
             f.close()
+        return x0, y0
+
+    def createTrainingSet(self, trainingType=None):
         feature_columns = [tf.contrib.layers.real_valued_column("", dimension=len(settings.my_global_features))]
         self.classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
                                                         hidden_units=[len(settings.my_global_features)*2,len(settings.my_global_features)*4,len(settings.my_global_features)],
                                                          n_classes=2 if trainingType == "golnogol" else 3)
 
-        self.classifier.fit(input_fn=np.array(np.array(x0), np.array(y0)), max_steps=100000)
+        self.classifier.fit(input_fn=self.my_input_fn, max_steps=100000)
         self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
         self.clf.fit(x0, y0)
 

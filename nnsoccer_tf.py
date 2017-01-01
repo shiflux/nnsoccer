@@ -19,7 +19,7 @@ class SoccerPredictorTF:
         self.tf_session = tf.InteractiveSession()
         self.training_x = list()
         self.training_y = list()
-        #tf.logging.set_verbosity(tf.logging.ERROR)
+        tf.logging.set_verbosity(tf.logging.ERROR)
 
     def createTrainingSet(self, trainingType=None):
         if os.path.exists("training_games_list.save"):

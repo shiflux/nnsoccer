@@ -139,40 +139,39 @@ class SoccerPredictorTF:
         return x
 
     def test(self, serie, trainingType=None):
-        X1, Y1 = None
         if os.path.exists("test_games_list.save"):
             f = open("test_games_list.save", "rb")
-            X1 = pickle.load(f)
-            Y1 = pickle.load(f)
+            x1 = pickle.load(f)
+            y1 = pickle.load(f)
             f.close()
         else:
-            X1, Y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
+            x1, y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
             f = open("test_games_list.save", "wb")
-            pickle.dump(X1, f, protocol=pickle.HIGHEST_PROTOCOL)
-            pickle.dump(Y1, f, protocol=pickle.HIGHEST_PROTOCOL)
+            pickle.dump(x1, f, protocol=pickle.HIGHEST_PROTOCOL)
+            pickle.dump(y1, f, protocol=pickle.HIGHEST_PROTOCOL)
             f.close()
-        X1, Y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
-        accuracy_score = self.classifier.evaluate(x=np.array(X1), y=np.array(Y1))["accuracy"]
+        x1, y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
+        accuracy_score = self.classifier.evaluate(x=np.array(x1), y=np.array(y1))["accuracy"]
         print('Accuracy: {0:f}'.format(accuracy_score))
 
         #predicted = list(self.classifier.predict(np.array(X1), as_iterable=True))
-        predicted_prob = list(self.classifier.predict_proba(np.array(X1), as_iterable=True))
+        predicted_prob = list(self.classifier.predict_proba(np.array(x1), as_iterable=True))
 
-        predicted_prob_svm = (self.clf.predict_proba(X1))
+        predicted_prob_svm = (self.clf.predict_proba(x1))
         #predicted_svm = (self.clf.predict(X1))
 
         temp_res = []
         self.list_of_0 = []
         self.list_of_1 = []
         self.list_of_2 = []
-        for x in range(len(Y1)):
+        for x in range(len(y1)):
             probs = list()
             for p in range(2 if trainingType == "golnogol" else 3):
                 probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
             max_prob = max(probs)
             max_index = probs.index(max_prob)
             if self.max_threshold > max_prob >= self.threshold:
-                if max_index == Y1[x]:
+                if max_index == y1[x]:
                     temp_res.append(1)
                 else:
                     temp_res.append(0)

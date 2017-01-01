@@ -145,7 +145,7 @@ class SoccerPredictorTF:
 
     def test(self, serie, trainingType=None):
         x1, y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
-        accuracy_score = self.classifier.evaluate(x=np.array(x1), y=np.array(y1))["accuracy"]
+        accuracy_score = self.classifier.evaluate(x=np.array(x1).astype(np.float32), y=np.array(y1).astype(np.int32))["accuracy"]
         print('Accuracy: {0:f}'.format(accuracy_score))
 
         #predicted = list(self.classifier.predict(np.array(X1), as_iterable=True))

@@ -62,7 +62,6 @@ class SoccerPredictorTF:
             for match in temp_data:
                 homet = match[0]
                 awayt = match[1]
-                print(homet, awayt)
                 if not (homet in features and awayt in features):
                     continue
                 lx = features[homet] + features[awayt]
@@ -86,6 +85,7 @@ class SoccerPredictorTF:
 
                 x.append(lx)
                 y.append(ly)
+        print(x)
         return x, y
 
     def getFeatures(self, serie, season, my_features=settings.my_global_features):

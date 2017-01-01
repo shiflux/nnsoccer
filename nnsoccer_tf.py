@@ -85,7 +85,6 @@ class SoccerPredictorTF:
 
                 x.append(lx)
                 y.append(ly)
-        print(x)
         return x, y
 
     def getFeatures(self, serie, season, my_features=settings.my_global_features):

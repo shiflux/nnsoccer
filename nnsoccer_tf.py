@@ -5,7 +5,8 @@ import numpy as np
 import json
 from sklearn import svm
 from datetime import datetime
-
+import os.path
+import pickle
 
 
 class SoccerPredictorTF:
@@ -18,6 +19,12 @@ class SoccerPredictorTF:
         self.tf_session = tf.InteractiveSession()
 
     def createTrainingSet(self, trainingType=None):
+        if os.path.exists("predictor.save"):
+            f = open("predictor.save", "rb")
+            self.classifier = pickle.load(f)
+            self.clf = pickle.load(f)
+            f.close()
+            return
         x0, y0 = self.createSeasonTrainingSet(serie="serie-a", season="15-16", trainingType=trainingType)
         x1, y1 = self.createSeasonTrainingSet(serie="serie-a", season="14-15", trainingType=trainingType)
         x0 += x1
@@ -33,6 +40,10 @@ class SoccerPredictorTF:
         self.classifier.fit(x = np.array(x0), y = np.array(y0), steps=2000)
         self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
         self.clf.fit(x0, y0)
+        f = open("predictor.save")
+        pickle.dump(self.classifier, f, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(self.clf, f, protocol=pickle.HIGHEST_PROTOCOL)
+        f.close()
 
 
     def createSeasonTrainingSet(self, serie, season, trainingType=None):

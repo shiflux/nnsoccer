@@ -172,6 +172,7 @@ class SoccerPredictorTF:
             temp_games.append(key)
         res_svm = self.clf.predict_proba(new_list)
         res = list(self.classifier.predict_proba(np.array(new_list), as_iterable=True))
+        print(">>>>>>>>>>>>>", temp_games)
         for x in range(len(temp_games)):
             temp = []
             for y in range(len(res[x])):

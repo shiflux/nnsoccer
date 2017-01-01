@@ -41,7 +41,7 @@ class SoccerPredictorTF:
                                                         hidden_units=[len(settings.my_global_features)*2,len(settings.my_global_features)*4,len(settings.my_global_features)],
                                                          n_classes=2 if trainingType == "golnogol" else 3)
 
-        self.classifier.fit(input_fn=(np.array(x0), np.array(y0)), max_steps=100000)
+        self.classifier.fit(input_fn=np.array(np.array(x0), np.array(y0)), max_steps=100000)
         self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
         self.clf.fit(x0, y0)
 

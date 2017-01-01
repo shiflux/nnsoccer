@@ -11,12 +11,14 @@ import pickle
 
 class SoccerPredictorTF:
     def __init__(self):
-        self.list_of_0 = []
-        self.list_of_1 = []
-        self.list_of_2 = []
+        self.list_of_0 = list()
+        self.list_of_1 = list()
+        self.list_of_2 = list()
         self.threshold = 0
         self.max_threshold = 3
         self.tf_session = tf.InteractiveSession()
+        self.training_x = list()
+        self.training_y = list()
 
 
     def my_input_fn(self):
@@ -37,6 +39,8 @@ class SoccerPredictorTF:
             pickle.dump(x0, f, protocol=pickle.HIGHEST_PROTOCOL)
             pickle.dump(y0, f, protocol=pickle.HIGHEST_PROTOCOL)
             f.close()
+        self.training_x = x0
+        self.training_y = y0
         return x0, y0
 
     def createTrainingSet(self, trainingType=None):
@@ -47,7 +51,7 @@ class SoccerPredictorTF:
 
         self.classifier.fit(input_fn=self.my_input_fn, max_steps=100000)
         self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
-        self.clf.fit(x0, y0)
+        self.clf.fit(self.training_x, self.training_y)
 
 
 

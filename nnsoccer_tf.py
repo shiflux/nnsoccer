@@ -46,7 +46,7 @@ class SoccerPredictorTF:
                                                          hidden_units=[int(len(settings.my_global_features)/2)],
                                                          n_classes=2 if trainingType == "golnogol" else 3)
 
-        self.classifier.fit(x=np.array(self.training_x), y=np.array(self.training_y), steps=settings.steps)
+        self.classifier.fit(x=np.array(self.training_x).astype(np.float32), y=np.array(self.training_y).astype(np.float32), steps=settings.steps)
         self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
         self.clf.fit(self.training_x, self.training_y)
 
@@ -149,7 +149,7 @@ class SoccerPredictorTF:
         print('Accuracy: {0:f}'.format(accuracy_score))
 
         #predicted = list(self.classifier.predict(np.array(X1), as_iterable=True))
-        predicted_prob = list(self.classifier.predict_proba(np.array(x1), as_iterable=True))
+        predicted_prob = list(self.classifier.predict_proba(np.array(x1).astype(np.float32), as_iterable=True))
 
         predicted_prob_svm = (self.clf.predict_proba(x1))
         #predicted_svm = (self.clf.predict(X1))
@@ -187,7 +187,7 @@ class SoccerPredictorTF:
             new_list.append(predict_set[key])
             temp_games.append(key)
         res_svm = self.clf.predict_proba(new_list)
-        res = list(self.classifier.predict_proba(np.array(new_list), as_iterable=True))
+        res = list(self.classifier.predict_proba(np.array(new_list).astype(np.float32), as_iterable=True))
         for x in range(len(temp_games)):
             temp = []
             for y in range(len(res[x])):

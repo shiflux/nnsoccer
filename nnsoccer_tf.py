@@ -43,7 +43,7 @@ class SoccerPredictorTF:
         self.training_y = y0
         feature_columns = [tf.contrib.layers.real_valued_column("", dimension=len(settings.my_global_features))]
         self.classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
-                                                         hidden_units=[len(settings.my_global_features)*2,len(settings.my_global_features)*4,len(settings.my_global_features)],
+                                                         hidden_units=[int(len(settings.my_global_features)/2)],
                                                          n_classes=2 if trainingType == "golnogol" else 3)
 
         self.classifier.fit(x=np.array(self.training_x), y=np.array(self.training_y), max_steps=settings.steps)

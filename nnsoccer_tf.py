@@ -198,7 +198,8 @@ class SoccerPredictorTF:
         for x in range(len(temp_games)):
             temp = []
             for y in range(len(res[x])):
-                temp.append(res[x][y]/2 + res_svm[x][y]/2)
+                #temp.append(res[x][y]/2 + res_svm[x][y]/2)
+                temp.append(res_svm[x][y]/2)
             results[temp_games[x]] = temp
         return results
 

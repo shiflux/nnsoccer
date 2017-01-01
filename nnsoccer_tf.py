@@ -19,19 +19,23 @@ class SoccerPredictorTF:
         self.tf_session = tf.InteractiveSession()
 
     def createTrainingSet(self, trainingType=None):
-        if os.path.exists("predictor.save"):
-            f = open("predictor.save", "rb")
-            self.classifier = pickle.load(f)
-            self.clf = pickle.load(f)
+        if os.path.exists("training_games_list.save"):
+            f = open("training_games_list.save", "rb")
+            x0 = pickle.load(f)
+            y0 = pickle.load(f)
             f.close()
-            return
-        x0, y0 = self.createSeasonTrainingSet(serie="serie-a", season="15-16", trainingType=trainingType)
-        x1, y1 = self.createSeasonTrainingSet(serie="serie-a", season="14-15", trainingType=trainingType)
-        x0 += x1
-        y0 += y1
-        x1, y1 = self.createSeasonTrainingSet(serie="serie-b", season="15-16", trainingType=trainingType)
-        x0 += x1
-        y0 += y1
+        else:
+            x0, y0 = self.createSeasonTrainingSet(serie="serie-a", season="15-16", trainingType=trainingType)
+            x1, y1 = self.createSeasonTrainingSet(serie="serie-a", season="14-15", trainingType=trainingType)
+            x0 += x1
+            y0 += y1
+            x1, y1 = self.createSeasonTrainingSet(serie="serie-b", season="15-16", trainingType=trainingType)
+            x0 += x1
+            y0 += y1
+            f = open("training_games_list.save", "wb")
+            pickle.dump(x0, f, protocol=pickle.HIGHEST_PROTOCOL)
+            pickle.dump(y0, f, protocol=pickle.HIGHEST_PROTOCOL)
+            f.close()
         feature_columns = [tf.contrib.layers.real_valued_column("", dimension=len(settings.my_global_features))]
         self.classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
                                                         hidden_units=[len(settings.my_global_features)*2,len(settings.my_global_features)*4,len(settings.my_global_features)],
@@ -40,10 +44,7 @@ class SoccerPredictorTF:
         self.classifier.fit(x = np.array(x0), y = np.array(y0), steps=2000)
         self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
         self.clf.fit(x0, y0)
-        f = open("predictor.save", "wb")
-        pickle.dump(self.classifier, f, protocol=pickle.HIGHEST_PROTOCOL)
-        pickle.dump(self.clf, f, protocol=pickle.HIGHEST_PROTOCOL)
-        f.close()
+
 
 
     def createSeasonTrainingSet(self, serie, season, trainingType=None):

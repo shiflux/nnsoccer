@@ -19,6 +19,7 @@ class SoccerPredictorTF:
         self.tf_session = tf.InteractiveSession()
         self.training_x = list()
         self.training_y = list()
+        tf.logging.set_verbosity(tf.logging.ERROR)
 
     def createTrainingSet(self, trainingType=None):
         if os.path.exists("training_games_list.save"):
@@ -45,7 +46,7 @@ class SoccerPredictorTF:
                                                          hidden_units=[len(settings.my_global_features)*2,len(settings.my_global_features)*4,len(settings.my_global_features)],
                                                          n_classes=2 if trainingType == "golnogol" else 3)
 
-        self.classifier.fit(x=np.array(self.training_x), y=np.array(self.training_y), max_steps=20000)
+        self.classifier.fit(x=np.array(self.training_x), y=np.array(self.training_y), max_steps=1)
         self.clf = svm.SVC(kernel='linear', C=settings.C1, gamma=settings.gamma, probability=True)
         self.clf.fit(self.training_x, self.training_y)
 

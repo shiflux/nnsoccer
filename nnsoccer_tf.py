@@ -56,8 +56,9 @@ class SoccerPredictorTF:
         x, y = [], []
         features = self.getFeatures(serie=serie, season=season)
         rounds = self.getSeasonRounds(serie, season)
-        for round in rounds:
-            temp_data = self.getDetailedRoundData(round, serie, season)
+        for r in rounds:
+            print(r)
+            temp_data = self.getDetailedRoundData(r, serie, season)
             for match in temp_data:
                 homet = match[0]
                 awayt = match[1]
@@ -84,7 +85,6 @@ class SoccerPredictorTF:
 
                 x.append(lx)
                 y.append(ly)
-        print(x)
         return x, y
 
     def getFeatures(self, serie, season, my_features=settings.my_global_features):

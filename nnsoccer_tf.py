@@ -104,6 +104,8 @@ class SoccerPredictorTF:
         temp_dict = OrderedDict()
         for key in dict:
             temp_dict[key] = OrderedDict()
+            for f in my_features:
+                temp_dict[key][f] = list()
         rounds = self.getSeasonRounds(serie, season)
         for r in rounds:
             response = urllib.request.urlopen(settings.api_link + "leagues/" + serie + "/seasons/" + season + "/rounds/" + r + "/matches")
@@ -113,10 +115,8 @@ class SoccerPredictorTF:
                 homet = match["home"]["team"]
                 awayt = match["away"]["team"]
                 for f in my_features:
-                    print(match["home"])
-                    print(f)
-                    temp_dict[homet]["ball"].append(match["home"][f])
-                    temp_dict[awayt]["ball"].append(match["away"][f])
+                    temp_dict[homet][f].append(match["home"][f])
+                    temp_dict[awayt][f].append(match["away"][f])
         for team in temp_dict:
             for feat in temp_dict[team]:
                 dict[team].append(np.mean(temp_dict[team][feat]))

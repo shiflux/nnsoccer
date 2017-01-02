@@ -194,7 +194,7 @@ class SoccerPredictorTF:
                 max_index = probs.index(max_prob)
                 probs.remove(max_prob)
                 second_max_prob = max(probs)
-                second_max_index = probs.index(max_prob)
+                second_max_index = probs.index(second_max_prob)
                 if self.max_threshold > max_prob+second_max_prob >= self.threshold:
                     if max_index == y1[x] or second_max_index == y1[x]:
                         temp_res.append(1)

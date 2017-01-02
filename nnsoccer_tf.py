@@ -106,8 +106,7 @@ class SoccerPredictorTF:
             temp_dict[key] = OrderedDict()
         rounds = self.getSeasonRounds(serie, season)
         for r in rounds:
-            temp_data = self.getDetailedRoundData(r, serie, season)
-            response = urllib.request.urlopen(settings.api_link + "leagues/" + serie + "/seasons/" + season + "/rounds/" + round + "/matches")
+            response = urllib.request.urlopen(settings.api_link + "leagues/" + serie + "/seasons/" + season + "/rounds/" + r + "/matches")
             r = json.loads(response.read().decode(response.info().get_param('charset') or 'utf-8'))
             matches = r['data']['matches']
             for match in matches:

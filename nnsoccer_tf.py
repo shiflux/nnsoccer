@@ -122,6 +122,7 @@ class SoccerPredictorTF:
         for team in temp_dict:
             for feat in temp_dict[team]:
                 dict[team].append(np.mean(temp_dict[team][feat]))
+                print(np.mean(temp_dict[team][feat]))
         return dict
 
     def getSeasonRounds(self, serie, season):

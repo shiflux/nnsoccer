@@ -171,7 +171,7 @@ class SoccerPredictorTF:
         return x
 
     def test(self, serie, trainingType=None):
-        x1, y1 = self.createSeasonTrainingSet(serie, season=settings.current_season, trainingType=trainingType)
+        x1, y1 = self.createSeasonTrainingSet(serie, season=settings.current_season)
         accuracy_score = self.classifier.evaluate(x=np.array(x1).astype(np.float32), y=np.array(y1).astype(np.int32))["accuracy"]
         print('Accuracy: {0:f}'.format(accuracy_score))
 
@@ -185,24 +185,45 @@ class SoccerPredictorTF:
         self.list_of_0 = []
         self.list_of_1 = []
         self.list_of_2 = []
-        for x in range(len(y1)):
-            probs = list()
-            for p in range(2 if trainingType == "golnogol" else 3):
-                #probs.append((predicted_prob_svm[x][p])/2)
-                probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
-            max_prob = max(probs)
-            max_index = probs.index(max_prob)
-            if self.max_threshold > max_prob >= self.threshold:
-                if max_index == y1[x]:
-                    temp_res.append(1)
-                else:
-                    temp_res.append(0)
-                if max_index == 0:
-                    self.list_of_0.append(temp_res[-1])
-                elif max_index == 1:
-                    self.list_of_1.append(temp_res[-1])
-                else:
-                    self.list_of_2.append(temp_res[-1])
+        if trainingType == "double":
+            for x in range(len(y1)):
+                probs = list()
+                for p in range(3):
+                    probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
+                max_prob = max(probs)
+                max_index = probs.index(max_prob)
+                probs.remove(max_prob)
+                second_max_prob = max(probs)
+                second_max_index = probs.index(max_prob)
+                if self.max_threshold > max_prob+second_max_prob >= self.threshold:
+                    if max_index == y1[x] or second_max_index == y1[x]:
+                        temp_res.append(1)
+                    else:
+                        temp_res.append(0)
+                    if max_index == 0 or second_max_index == 0:
+                        self.list_of_0.append(temp_res[-1])
+                    if max_index == 1 or second_max_index == 1:
+                        self.list_of_1.append(temp_res[-1])
+                    if max_index == 2 or second_max_index == 2:
+                        self.list_of_2.append(temp_res[-1])
+        else:
+            for x in range(len(y1)):
+                probs = list()
+                for p in range(3):
+                    probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
+                max_prob = max(probs)
+                max_index = probs.index(max_prob)
+                if self.max_threshold > max_prob >= self.threshold:
+                    if max_index == y1[x]:
+                        temp_res.append(1)
+                    else:
+                        temp_res.append(0)
+                    if max_index == 0:
+                        self.list_of_0.append(temp_res[-1])
+                    elif max_index == 1:
+                        self.list_of_1.append(temp_res[-1])
+                    else:
+                        self.list_of_2.append(temp_res[-1])
         return temp_res
 
     def predictGames(self, games_list, serie):

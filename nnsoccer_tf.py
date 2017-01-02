@@ -114,6 +114,7 @@ class SoccerPredictorTF:
                 awayt = match["away"]["team"]
                 for f in my_features:
                     print(match["home"])
+                    print(f)
                     temp_dict[homet][f].append(match["home"][f])
                     temp_dict[awayt][f].append(match["away"][f])
         for team in temp_dict:

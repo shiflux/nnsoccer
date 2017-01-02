@@ -115,8 +115,10 @@ class SoccerPredictorTF:
                 homet = match["home"]["team"]
                 awayt = match["away"]["team"]
                 for f in my_features:
-                    temp_dict[homet][f].append(match["home"][f])
-                    temp_dict[awayt][f].append(match["away"][f])
+                    if homet in temp_dict:
+                        temp_dict[homet][f].append(match["home"][f])
+                    if awayt in temp_dict:
+                        temp_dict[awayt][f].append(match["away"][f])
         for team in temp_dict:
             for feat in temp_dict[team]:
                 dict[team].append(np.mean(temp_dict[team][feat]))

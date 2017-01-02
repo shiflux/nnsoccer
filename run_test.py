@@ -40,7 +40,6 @@ if __name__ == "__main__":
     list_of_2 = []
     for_log = list()
     if args.type is not None:
-        print("ssssssssss")
         myPredictor.createTrainingSet(trainingType=args.type)
     else:
         myPredictor.createTrainingSet()

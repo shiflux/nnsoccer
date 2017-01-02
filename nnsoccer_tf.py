@@ -33,9 +33,9 @@ class SoccerPredictorTF:
             # x1, y1 = self.createSeasonTrainingSet(serie="serie-a", season="14-15", trainingType=trainingType)
             # x0 += x1
             # y0 += y1
-            x1, y1 = self.createSeasonTrainingSet(serie="serie-b", season="15-16", trainingType=trainingType)
-            x0 += x1
-            y0 += y1
+            # x1, y1 = self.createSeasonTrainingSet(serie="serie-b", season="15-16", trainingType=trainingType)
+            # x0 += x1
+            # y0 += y1
             f = open("training_games_list.save", "wb")
             pickle.dump(x0, f, protocol=pickle.HIGHEST_PROTOCOL)
             pickle.dump(y0, f, protocol=pickle.HIGHEST_PROTOCOL)
@@ -122,7 +122,6 @@ class SoccerPredictorTF:
         for team in temp_dict:
             for feat in temp_dict[team]:
                 dict[team].append(np.mean(temp_dict[team][feat]))
-                print(np.mean(temp_dict[team][feat]))
         return dict
 
     def getSeasonRounds(self, serie, season):

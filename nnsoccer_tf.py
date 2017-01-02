@@ -30,12 +30,12 @@ class SoccerPredictorTF:
             f.close()
         else:
             x0, y0 = self.createSeasonTrainingSet(serie="serie-a", season="15-16", trainingType=trainingType)
-            # x1, y1 = self.createSeasonTrainingSet(serie="serie-a", season="14-15", trainingType=trainingType)
-            # x0 += x1
-            # y0 += y1
-            # x1, y1 = self.createSeasonTrainingSet(serie="serie-b", season="15-16", trainingType=trainingType)
-            # x0 += x1
-            # y0 += y1
+            x1, y1 = self.createSeasonTrainingSet(serie="serie-a", season="14-15", trainingType=trainingType)
+            x0 += x1
+            y0 += y1
+            x1, y1 = self.createSeasonTrainingSet(serie="serie-b", season="15-16", trainingType=trainingType)
+            x0 += x1
+            y0 += y1
             f = open("training_games_list.save", "wb")
             pickle.dump(x0, f, protocol=pickle.HIGHEST_PROTOCOL)
             pickle.dump(y0, f, protocol=pickle.HIGHEST_PROTOCOL)
@@ -98,7 +98,8 @@ class SoccerPredictorTF:
             for f in my_features:
                 f_list.append(1.0 * st["overall"][f] / matches_played)
             temp_dict[st["team"]] = f_list
-        return self.get_extra_features(serie=serie, season=season, dict=temp_dict)
+        #return self.get_extra_features(serie=serie, season=season, dict=temp_dict)
+        return temp_dict
 
     def get_extra_features(self, serie, season, dict, my_features=settings.my_global_extra_features):
         temp_dict = OrderedDict()

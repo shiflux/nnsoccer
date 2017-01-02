@@ -30,9 +30,9 @@ class SoccerPredictorTF:
             f.close()
         else:
             x0, y0 = self.createSeasonTrainingSet(serie="serie-a", season="15-16", trainingType=trainingType)
-            #x1, y1 = self.createSeasonTrainingSet(serie="serie-a", season="14-15", trainingType=trainingType)
-            #x0 += x1
-            #y0 += y1
+            x1, y1 = self.createSeasonTrainingSet(serie="serie-a", season="14-15", trainingType=trainingType)
+            x0 += x1
+            y0 += y1
             x1, y1 = self.createSeasonTrainingSet(serie="serie-b", season="15-16", trainingType=trainingType)
             x0 += x1
             y0 += y1
@@ -113,6 +113,7 @@ class SoccerPredictorTF:
                 homet = match["home"]["team"]
                 awayt = match["away"]["team"]
                 for f in my_features:
+                    print(match["home"])
                     temp_dict[homet][f].append(match["home"][f])
                     temp_dict[awayt][f].append(match["away"][f])
         for team in temp_dict:

@@ -115,8 +115,8 @@ class SoccerPredictorTF:
                 for f in my_features:
                     print(match["home"])
                     print(f)
-                    temp_dict[homet][f].append(match["home"][f])
-                    temp_dict[awayt][f].append(match["away"][f])
+                    temp_dict[homet]["ball"].append(match["home"][f])
+                    temp_dict[awayt]["ball"].append(match["away"][f])
         for team in temp_dict:
             for feat in temp_dict[team]:
                 dict[team].append(np.mean(temp_dict[team][feat]))

@@ -98,7 +98,28 @@ class SoccerPredictorTF:
             for f in my_features:
                 f_list.append(1.0 * st["overall"][f] / matches_played)
             temp_dict[st["team"]] = f_list
-        return temp_dict
+        return self.get_extra_features(temp_dict)
+
+    def get_extra_features(self, serie, season, dict, my_features=settings.my_global_extra_features):
+        temp_dict = OrderedDict()
+        for key in dict:
+            temp_dict[key] = OrderedDict()
+        rounds = self.getSeasonRounds(serie, season)
+        for r in rounds:
+            temp_data = self.getDetailedRoundData(r, serie, season)
+            response = urllib.request.urlopen(settings.api_link + "leagues/" + serie + "/seasons/" + season + "/rounds/" + round + "/matches")
+            r = json.loads(response.read().decode(response.info().get_param('charset') or 'utf-8'))
+            matches = r['data']['matches']
+            for match in matches:
+                homet = match["home"]["team"]
+                awayt = match["away"]["team"]
+                for f in my_features:
+                    temp_dict[homet][f].append(match["home"][f])
+                    temp_dict[awayt][f].append(match["away"][f])
+        for team in temp_dict:
+            for feat in temp_dict[team]:
+                dict[team].append(np.mean(temp_dict[team][feat]))
+        return dict
 
     def getSeasonRounds(self, serie, season):
         response = urllib.request.urlopen(settings.api_link + "leagues/" + serie + "/seasons/" + season + "/rounds")

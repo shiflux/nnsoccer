@@ -98,7 +98,7 @@ class SoccerPredictorTF:
             for f in my_features:
                 f_list.append(1.0 * st["overall"][f] / matches_played)
             temp_dict[st["team"]] = f_list
-        return self.get_extra_features(temp_dict, serie=serie, season=season, dict=temp_dict)
+        return self.get_extra_features(serie=serie, season=season, dict=temp_dict)
 
     def get_extra_features(self, serie, season, dict, my_features=settings.my_global_extra_features):
         temp_dict = OrderedDict()

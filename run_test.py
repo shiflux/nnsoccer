@@ -39,8 +39,8 @@ if __name__ == "__main__":
     list_of_1 = []
     list_of_2 = []
     for_log = list()
-    if args.type == "golnogol":
-        myPredictor.createTrainingSet(trainingType="golnogol")
+    if args.type is not None:
+        myPredictor.createTrainingSet(trainingType=args.type)
     else:
         myPredictor.createTrainingSet()
     if serie == "all":

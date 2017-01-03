@@ -17,7 +17,7 @@ class SoccerPredictorTF:
         self.list_of_2 = list()
         self.threshold = 0
         self.max_threshold = 3
-        self.tf_session = tf.InteractiveSession()
+        self.tf_session = tf.Session()
         self.training_x = list()
         self.training_y = list()
         tf.logging.set_verbosity(tf.logging.ERROR)

@@ -17,7 +17,8 @@ class SoccerPredictorTF:
         self.list_of_2 = list()
         self.threshold = 0
         self.max_threshold = 3
-        self.tf_session = tf.Session()
+        a = tf.set_random_seed(1234)
+        self.tf_session = tf.Session(a)
         self.training_x = list()
         self.training_y = list()
         tf.logging.set_verbosity(tf.logging.ERROR)
@@ -43,7 +44,6 @@ class SoccerPredictorTF:
         self.training_x = x0
         self.training_y = y0
         feature_columns = [tf.contrib.layers.real_valued_column("", dimension=len(settings.my_global_features))] #+len(settings.my_global_extra_features)
-        tf.set_random_seed(42)
         self.classifier = tf.contrib.learn.DNNClassifier(model_dir="models",
                                                             feature_columns=feature_columns,
                                                          hidden_units=[int((len(settings.my_global_features)+len(settings.my_global_extra_features))/2)],

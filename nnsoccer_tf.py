@@ -69,9 +69,8 @@ class SoccerPredictorTF:
                 if(len(features[homet]) != len(features[awayt])):
                     continue
                 lx = features[homet] + features[awayt]
-                added = [features[homet][i] - features[awayt][i] for i in range(len(features[homet]))]
-                lx += added
-                print(len(lx))
+                #added = [features[homet][i] - features[awayt][i] for i in range(len(features[homet]))]
+                #lx += added
                 ly = temp_data[match]
                 if ly == "":
                     break
@@ -250,7 +249,7 @@ class SoccerPredictorTF:
         for x in range(len(temp_games)):
             temp = []
             for y in range(len(res[x])):
-                temp.append(res[x][y]/2 + res_svm[x][y]/2)
+                temp.append(res[x][y] + res_svm[x][y])
             results[temp_games[x]] = temp
         return results
 

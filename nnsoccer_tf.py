@@ -186,9 +186,15 @@ class SoccerPredictorTF:
         predicted_prob_svm = (self.clf.predict_proba(x1))
         #predicted_svm = (self.clf.predict(X1))
 
-        #predicted_prob_inverted = list(self.classifier.predict_proba(np.array(x2).astype(np.float32), as_iterable=True))
+        x2 = list()
+        for arr in x1:
+            temp_var = [0] * len(arr)
+            for var in range(len(arr)):
+                temp_var[(var+(len(arr)/2)) % len(arr)] = temp_var[var]
+            x2.append(temp_var)
+        predicted_prob_inverted = list(self.classifier.predict_proba(np.array(x2).astype(np.float32), as_iterable=True))
 
-        #predicted_prob_svm_inverted = (self.clf.predict_proba(x2))
+        predicted_prob_svm_inverted = (self.clf.predict_proba(x2))
 
         temp_res = []
         self.list_of_0 = []
@@ -249,7 +255,7 @@ class SoccerPredictorTF:
         for x in range(len(temp_games)):
             temp = []
             for y in range(len(res[x])):
-                temp.append(res[x][y] + res_svm[x][y])
+                temp.append(res[x][y]/2 + res_svm[x][y]/2)
             results[temp_games[x]] = temp
         return results
 

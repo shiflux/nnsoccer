@@ -206,7 +206,7 @@ class SoccerPredictorTF:
             temp_var[0] = temp_var[2]
             temp_var[2] = t
 
-        inverted = True
+        inverted = False
 
         temp_res = []
         self.list_of_0 = []

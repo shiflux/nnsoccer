@@ -217,7 +217,7 @@ class SoccerPredictorTF:
                 probs = list()
                 for p in range(3):
                     probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
-                    if inverted:
+                    if True:
                         temp_prob = (predicted_prob_inverted[x][p] + predicted_prob_svm_inverted[x][p]) / 2
                         print(temp_prob, probs[-1])
                         probs[-1] = (probs[-1]*2 + temp_prob)/3

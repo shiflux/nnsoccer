@@ -66,7 +66,7 @@ class SoccerPredictorTF:
                 awayt = match[1]
                 if not (homet in features and awayt in features):
                     continue
-                lx = features[homet] + features[awayt]
+                lx = features[homet] + features[awayt] + [var1-var2 for var1 in features[homet] for var2 in features[awayt]]
                 ly = temp_data[match]
                 if ly == "":
                     break
@@ -181,6 +181,10 @@ class SoccerPredictorTF:
 
         predicted_prob_svm = (self.clf.predict_proba(x1))
         #predicted_svm = (self.clf.predict(X1))
+
+        #predicted_prob_inverted = list(self.classifier.predict_proba(np.array(x2).astype(np.float32), as_iterable=True))
+
+        #predicted_prob_svm_inverted = (self.clf.predict_proba(x2))
 
         temp_res = []
         self.list_of_0 = []

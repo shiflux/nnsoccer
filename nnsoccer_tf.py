@@ -241,7 +241,7 @@ class SoccerPredictorTF:
                     probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
                     if inverted:
                         temp_prob = (predicted_prob_inverted[x][p] + predicted_prob_svm_inverted[x][p]) / 2
-                        probs[-1] = (probs[-1] + temp_prob)/2
+                        probs[-1] = (probs[-1]*4 + temp_prob)/5
                 max_prob = max(probs)
                 max_index = probs.index(max_prob)
                 if self.max_threshold > max_prob >= self.threshold:

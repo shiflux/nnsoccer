@@ -196,6 +196,18 @@ class SoccerPredictorTF:
 
         predicted_prob_svm_inverted = (self.clf.predict_proba(x2))
 
+        for temp_var in predicted_prob_inverted:
+            t = temp_var[0]
+            temp_var[0] = temp_var[2]
+            temp_var[2] = t
+
+        for temp_var in predicted_prob_svm_inverted:
+            t = temp_var[0]
+            temp_var[0] = temp_var[2]
+            temp_var[2] = t
+
+        inverted = True
+
         temp_res = []
         self.list_of_0 = []
         self.list_of_1 = []
@@ -205,6 +217,10 @@ class SoccerPredictorTF:
                 probs = list()
                 for p in range(3):
                     probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
+                    if inverted:
+                        temp_prob = (predicted_prob_inverted[x][p] + predicted_prob_svm_inverted[x][p]) / 2
+                        probs[-1] += temp_prob
+                        probs[-1] /= 2
                 max_prob = max(probs)
                 max_index = probs.index(max_prob)
                 probs.remove(max_prob)

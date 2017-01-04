@@ -66,7 +66,7 @@ class SoccerPredictorTF:
                 awayt = match[1]
                 if not (homet in features and awayt in features):
                     continue
-                if(len(eatures[homet]) != len(eatures[awayt]))
+                if(len(features[homet]) != len(features[awayt])):
                     continue
                 lx = features[homet] + features[awayt]
                 added = [features[homet][i] - features[awayt][i] for i in len(features[homet])]

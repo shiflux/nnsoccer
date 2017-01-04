@@ -69,7 +69,7 @@ class SoccerPredictorTF:
                 if(len(features[homet]) != len(features[awayt])):
                     continue
                 lx = features[homet] + features[awayt]
-                added = [features[homet][i] - features[awayt][i] for i in len(features[homet])]
+                added = [features[homet][i] - features[awayt][i] for i in range(len(features[homet]))]
                 lx += added
                 print(len(lx))
                 ly = temp_data[match]

@@ -206,8 +206,6 @@ class SoccerPredictorTF:
             temp_var[0] = temp_var[2]
             temp_var[2] = t
 
-        inverted = False
-
         temp_res = []
         self.list_of_0 = []
         self.list_of_1 = []
@@ -239,9 +237,9 @@ class SoccerPredictorTF:
                 probs = list()
                 for p in range(3):
                     probs.append((predicted_prob[x][p] + predicted_prob_svm[x][p]) / 2)
-                    if inverted:
-                        temp_prob = (predicted_prob_inverted[x][p] + predicted_prob_svm_inverted[x][p]) / 2
-                        probs[-1] = (probs[-1]*3 + temp_prob)/4
+                    # if True:
+                    #     temp_prob = (predicted_prob_inverted[x][p] + predicted_prob_svm_inverted[x][p]) / 2
+                    #     probs[-1] = (probs[-1]*3 + temp_prob)/4
                 max_prob = max(probs)
                 max_index = probs.index(max_prob)
                 if self.max_threshold > max_prob >= self.threshold:

@@ -66,7 +66,11 @@ class SoccerPredictorTF:
                 awayt = match[1]
                 if not (homet in features and awayt in features):
                     continue
-                lx = features[homet] + features[awayt] + [var1-var2 for var1 in features[homet] for var2 in features[awayt] if features[homet].index(var1) == features[awayt].index(var2)]
+                if(len(eatures[homet]) != len(eatures[awayt]))
+                    continue
+                lx = features[homet] + features[awayt]
+                added = [features[homet][i] - features[awayt][i] for i in len(features[homet])]
+                lx += added
                 print(len(lx))
                 ly = temp_data[match]
                 if ly == "":

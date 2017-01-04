@@ -190,6 +190,7 @@ class SoccerPredictorTF:
         for arr in x1:
             temp_var = [0] * len(arr)
             for var in range(len(arr)):
+                print((len(arr)/2))
                 temp_var[(var+(len(arr)/2)) % len(arr)] = temp_var[var]
             x2.append(temp_var)
         predicted_prob_inverted = list(self.classifier.predict_proba(np.array(x2).astype(np.float32), as_iterable=True))
